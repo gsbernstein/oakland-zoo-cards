@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - claude/cursor-agents-session-rh5udi
+  # Redeploy whenever the weekly image-cache refresh commits new photos.
+  # This is required, not just nice-to-have: that workflow commits/pushes
+  # using the default GITHUB_TOKEN, and GitHub deliberately does not let a
+  # GITHUB_TOKEN-authored push trigger other workflows' `on: push` (it's an
+  # anti-recursion guard) — so without this, the live site would silently
+  # keep serving stale content after every automated cache refresh.
+  workflow_run:
+    workflows: ["Refresh cached card images"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -17,6 +26,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -24,6 +34,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # workflow_run-triggered jobs check out the repo's default branch
+          # by default, which may not be this branch — pin explicitly (same
+          # branch the other workflows in this repo already pin to).
+          ref: claude/cursor-agents-session-rh5udi
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
