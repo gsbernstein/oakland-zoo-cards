@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oakland Zoo Card Checklist</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>" />
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
   <header class="site-header">
@@ -89,7 +89,14 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
-  <script src="live-sync.js"></script>
+  <!--
+    ?v=N cache-busts these files across deploys. There's no build step here,
+    so browsers can otherwise keep serving a stale cached copy of one file
+    (e.g. an old app.js) alongside a freshly-fetched index.html, which can
+    break in confusing ways if their shapes have diverged. Bump the number
+    on any change to app.js, live-sync.js, or styles.css.
+  -->
+  <script src="app.js?v=3"></script>
+  <script src="live-sync.js?v=3"></script>
 </body>
 </html>

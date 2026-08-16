@@ -367,7 +367,9 @@
 
   async function init() {
     try {
-      const res = await fetch("data.json");
+      // no-cache: always revalidate with the server rather than trusting a
+      // stale local copy — data.json is meant to be hand-edited over time.
+      const res = await fetch("data.json", { cache: "no-cache" });
       if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
       OAKLAND_ZOO_CARD_SETS = Array.isArray(data.sets) ? data.sets : [];
