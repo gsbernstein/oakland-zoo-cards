@@ -12,6 +12,7 @@
   const totalCountEl = document.getElementById("totalCount");
   const progressPercentEl = document.getElementById("progressPercent");
   const progressBarFill = document.getElementById("progressBarFill");
+  const syncStatusEl = document.getElementById("syncStatus");
 
   let owned = loadOwned();
   let collapsed = loadCollapsed();
@@ -331,8 +332,30 @@
     applyFilters();
   });
 
+  function renderAll() {
+    buildSets();
+    updateOverallProgress();
+    applyFilters();
+  }
+
+  // Hook for live-sync.js: this file always renders the bundled data.js
+  // snapshot first (so the page is instant and works with no network at
+  // all), then live-sync.js tries to refresh card numbers/photos from the
+  // zoo's live API in the background and reports back here.
+  window.__oaklandZooChecklist = {
+    onSyncResult(ok, changed, err) {
+      if (ok) {
+        if (changed) renderAll();
+        syncStatusEl.textContent = changed
+          ? "Synced with the zoo's live card list just now."
+          : "Checked the zoo's live card list — already up to date.";
+      } else {
+        syncStatusEl.textContent = "Showing the saved card snapshot (live sync unavailable).";
+        if (err) console.warn("Oakland Zoo live sync failed:", err);
+      }
+    },
+  };
+
   populateSetFilter();
-  buildSets();
-  updateOverallProgress();
-  applyFilters();
+  renderAll();
 })();

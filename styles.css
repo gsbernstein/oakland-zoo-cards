@@ -421,6 +421,10 @@ body {
   opacity: 0.75;
 }
 
+.sync-status:empty {
+  display: none;
+}
+
 @media (max-width: 520px) {
   .brand h1 {
     font-size: 1.2rem;
