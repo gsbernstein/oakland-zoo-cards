@@ -1,0 +1,48 @@
+name: Refresh cached card images
+
+on:
+  schedule:
+    # Mondays at 13:00 UTC. Oakland Zoo rotates cards monthly, so weekly is
+    # frequent enough to catch a card coming back into circulation without
+    # hammering their API.
+    - cron: "0 13 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-image-cache
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # This repo has no traditional default/main branch yet — everything
+          # lives on this branch. Update this ref if that ever changes (see
+          # the same caveat on pages.yml).
+          ref: claude/cursor-agents-session-rh5udi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Refresh image cache
+        run: node scripts/refresh-image-cache.js
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cache/
+          if git diff --staged --quiet; then
+            echo "No image cache changes this run."
+          else
+            git commit -m "Refresh cached card images"
+            git push origin HEAD:claude/cursor-agents-session-rh5udi
+          fi

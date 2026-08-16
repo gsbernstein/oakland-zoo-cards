@@ -1,3 +1,5 @@
+import { isUnavailableImageUrl } from "./wp-card-utils.js?v=1";
+
 (function () {
   const STORAGE_KEY = "oaklandZooCardChecklist.v1";
   const COLLAPSE_KEY = "oaklandZooCardChecklist.collapsed.v1";
@@ -68,11 +70,37 @@
   const PAW_PLACEHOLDER =
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e9dfc9'/%3E%3Ctext x='50' y='62' font-size='44' text-anchor='middle'%3E%F0%9F%90%BE%3C/text%3E%3C/svg%3E";
 
-  // The zoo's own site names these image files with an "Unavailable" (or
-  // "Retired Unavailable") suffix for cards not currently in physical
-  // rotation, rendering the same grayed-out photo + notice we mirror here.
+  // Precomputed once per card by applyImageCache() below, rather than
+  // re-derived from the URL each time — a locally cached file's own name
+  // won't contain "Unavailable" even when it *is* the last-ditch fallback
+  // tier, so the flag has to travel with the card, not be re-guessed later.
   function isUnavailable(card) {
-    return !!card.image && /unavailable/i.test(card.image);
+    return !!card.unavailable;
+  }
+
+  // Merges the local image cache (cache/manifest.json, refreshed weekly by
+  // .github/workflows/refresh-image-cache.yml) into the data.json snapshot,
+  // per card, per the preference order:
+  //   1. a live image found by live-sync.js (applied later, always wins)
+  //   2. a cached "available" real photo (this function)
+  //   3. data.json's own `image` (today's live zoo-hosted URL, available or not)
+  //   4. a cached "fallback" image — only for cards data.json has none for
+  //   5. the generic paw placeholder (app.js's own PAW_PLACEHOLDER, used
+  //      automatically wherever card.image ends up unset)
+  function applyImageCache(sets, manifest) {
+    sets.forEach((set) => {
+      set.cards.forEach((card) => {
+        const cached = manifest[cardKey(set.id, card.name)];
+        card.unavailable = isUnavailableImageUrl(card.image);
+        if (cached && cached.tier === "available") {
+          card.image = cached.file;
+          card.unavailable = false;
+        } else if (!card.image && cached && cached.tier === "fallback") {
+          card.image = cached.file;
+          card.unavailable = true;
+        }
+      });
+    });
   }
 
   const modalOverlay = document.getElementById("cardModalOverlay");
@@ -404,6 +432,17 @@
       setDataSourceBadge("cached", "Failed to load", "Couldn't load data.json at all.");
       return;
     }
+
+    // The image cache manifest is optional/best-effort — unlike data.json,
+    // its absence or failure isn't fatal, it just means fewer real photos.
+    let manifest = {};
+    try {
+      const res = await fetch("cache/manifest.json", { cache: "no-cache" });
+      if (res.ok) manifest = await res.json();
+    } catch (err) {
+      console.warn("Couldn't load cache/manifest.json (continuing without it):", err);
+    }
+    applyImageCache(OAKLAND_ZOO_CARD_SETS, manifest);
 
     // What's rendered right now is the snapshot; live-sync.js may upgrade
     // this to "Live" shortly (see onSyncResult above).

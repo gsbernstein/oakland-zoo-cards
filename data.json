@@ -5,7 +5,8 @@
     "`number` is only set where that \"N of 100\" pattern is present live on the site today — none of the special/limited-edition sets (Coexist CA, Protect the Pride, Tortugas de Guatemala, Special Edition) currently carry live numbering, even though the older printed PDF checklist numbered some of them.",
     "`image` is only set where the site has a live photo; cards without one (Ball (Royal) Python, and the Boo at the Zoo / Oakland Roots & Soul / ZooCamp special editions, none of which have a dedicated live category) fall back to a placeholder in the UI.",
     "protect-the-pride's dedicated category currently only lists African Lion live; Meerkat and Warthog for that same set appear under the special-edition catch-all category instead — a live-site categorization quirk, not a data-entry omission.",
-    "New cards rotate monthly at the zoo, so this list (and the above caveats) may need revisiting over time."
+    "New cards rotate monthly at the zoo, so this list (and the above caveats) may need revisiting over time.",
+    "Actual image display order at runtime: a live image found by live-sync.js at page load > cache/manifest.json tier=\"available\" (a real photo the weekly refresh-image-cache.yml Action found, downloaded, and committed under cache/images/ — including numbered photos still sitting in the WP media library but no longer attached as any post's current featured image) > this file's own image field (unchanged) > cache/manifest.json tier=\"fallback\" (a last-resort cached copy of whatever the live post has, used only for cards this file has no image for at all) > a generic placeholder icon. See scripts/refresh-image-cache.js and app.js's applyImageCache()."
   ],
   "sets": [
     {

@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "No dependencies or build step — this just tells Node to treat .js files as ES modules, so wp-card-utils.js can use import/export both in the browser (via <script type=module>) and in scripts/refresh-image-cache.js (run by the weekly GitHub Action)."
+}

@@ -71,6 +71,10 @@
       See <a href="https://www.oaklandzoo.org/trading-cards" target="_blank" rel="noopener">oaklandzoo.org/trading-cards</a>.
     </p>
     <p class="storage-note">Your progress is saved automatically in this browser.</p>
+    <p class="storage-note">
+      Photos come from the zoo's live site when available, otherwise a locally cached copy
+      refreshed weekly — see <code>cache/manifest.json</code>.
+    </p>
     <p id="syncStatus" class="storage-note sync-status"></p>
   </footer>
 
@@ -98,9 +102,12 @@
     so browsers can otherwise keep serving a stale cached copy of one file
     (e.g. an old app.js) alongside a freshly-fetched index.html, which can
     break in confusing ways if their shapes have diverged. Bump the number
-    on any change to app.js, live-sync.js, or styles.css.
+    on any change to app.js, live-sync.js, or styles.css. Both app.js and
+    live-sync.js are modules and import wp-card-utils.js with its own
+    separate ?v= in the import specifier — bump that one too on changes to
+    wp-card-utils.js.
   -->
-  <script src="app.js?v=5"></script>
-  <script src="live-sync.js?v=5"></script>
+  <script type="module" src="app.js?v=7"></script>
+  <script type="module" src="live-sync.js?v=7"></script>
 </body>
 </html>
