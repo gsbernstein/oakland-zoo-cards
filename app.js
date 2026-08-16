@@ -551,6 +551,23 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
       openModal(setId, card, item, checkbox, cardKey(setId, cardName));
       return true;
     },
+    // Hooks for share.js: a read-only snapshot of current owned counts
+    // (keyed the same way as this file's own cardKey()), and a way to apply
+    // one card's quantity from an imported/merged collection through the
+    // same setCount() every other control uses, so the grid/modal/progress
+    // stats all stay in sync regardless of what triggered the change.
+    getOwnedSnapshot() {
+      return { ...owned };
+    },
+    applyOwnedChange(setId, cardName, newCount) {
+      const item = setsContainer.querySelector(
+        `[data-set-id="${cssEscape(setId)}"] .card-item[data-card-name="${cssEscape(cardName.toLowerCase())}"]`
+      );
+      if (!item) return false;
+      const checkbox = item.querySelector("input[type=checkbox]");
+      setCount(setId, item, checkbox, cardKey(setId, cardName), newCount);
+      return true;
+    },
   };
 
   async function init() {

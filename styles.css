@@ -784,3 +784,177 @@ body {
   color: var(--oz-orange);
   flex-shrink: 0;
 }
+
+.share-dialog {
+  max-width: 420px;
+}
+
+.share-body {
+  padding: 20px 22px 24px;
+}
+
+.share-title {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+  color: var(--oz-green-dark);
+}
+
+.share-section {
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.share-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.share-section-title {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: var(--oz-green-dark);
+}
+
+.share-hint {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.share-link-row,
+.share-import-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.share-link-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: var(--oz-sky);
+}
+
+.share-native-btn {
+  width: 100%;
+}
+
+.share-image-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--oz-tan);
+  margin-bottom: 10px;
+}
+
+.share-image-preview {
+  display: block;
+  width: 100%;
+}
+
+.share-image-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.share-image-actions .btn {
+  flex: 1;
+  text-align: center;
+}
+
+.share-diff-wrap {
+  margin-top: 4px;
+}
+
+.share-diff-bulk-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.share-diff-bulk-actions .btn {
+  flex: 1;
+  font-size: 0.8rem;
+  padding: 7px 10px;
+}
+
+.share-diff-list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.share-diff-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg);
+}
+
+.share-diff-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.share-diff-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.share-diff-set {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.share-diff-choice {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.share-diff-choice label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.share-diff-choice label.selected {
+  background: var(--oz-sky);
+  border-color: var(--oz-green);
+  color: var(--oz-green-dark);
+  font-weight: 600;
+}
+
+.share-diff-choice input[type="radio"] {
+  accent-color: var(--oz-green);
+  margin: 0;
+}
+
+.share-apply-btn {
+  width: 100%;
+}

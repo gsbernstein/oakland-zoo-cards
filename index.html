@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oakland Zoo Card Checklist</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>" />
-<link rel="stylesheet" href="styles.css?v=6" />
+<link rel="stylesheet" href="styles.css?v=7" />
 </head>
 <body>
   <header class="site-header">
@@ -23,6 +23,7 @@
       </div>
       <div class="header-actions">
         <button id="scanBtn" class="btn btn-ghost" title="Scan a card with your camera">📷 Scan a Card</button>
+        <button id="shareBtn" class="btn btn-ghost" title="Share your collection or bring in someone else's">🔗 Share</button>
         <button id="resetBtn" class="btn btn-ghost" title="Clear all checked cards">Reset All</button>
       </div>
     </div>
@@ -134,6 +135,58 @@
     </div>
   </div>
 
+  <div id="shareModalOverlay" class="modal-overlay" hidden>
+    <div class="modal-dialog share-dialog" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+      <button type="button" id="shareCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+      <div class="share-body">
+        <h3 id="shareTitle" class="share-title">Share & Sync</h3>
+
+        <section class="share-section">
+          <h4 class="share-section-title">Send your collection</h4>
+          <p class="share-hint">
+            Share this link with your family. Opening it shows a card-by-card diff so they can
+            pick which of your counts to bring in — nothing changes automatically.
+          </p>
+          <div class="share-link-row">
+            <input type="text" id="shareLinkInput" class="share-link-input" readonly />
+            <button type="button" id="shareCopyBtn" class="btn btn-primary">Copy</button>
+          </div>
+          <button type="button" id="shareNativeBtn" class="btn btn-ghost share-native-btn" hidden>Share…</button>
+        </section>
+
+        <section class="share-section">
+          <h4 class="share-section-title">Share a snapshot image</h4>
+          <div class="share-image-wrap">
+            <img id="shareImagePreview" class="share-image-preview" alt="Your collection progress" />
+          </div>
+          <div class="share-image-actions">
+            <a id="shareImageDownloadBtn" class="btn btn-ghost" download="oakland-zoo-cards.png">Download</a>
+            <button type="button" id="shareImageShareBtn" class="btn btn-ghost" hidden>Share image…</button>
+          </div>
+        </section>
+
+        <section class="share-section">
+          <h4 class="share-section-title">Bring in someone else's collection</h4>
+          <p class="share-hint">Paste a link or code they sent you.</p>
+          <div class="share-import-row">
+            <input type="text" id="shareImportInput" class="share-link-input" placeholder="Paste a share link or code…" />
+            <button type="button" id="shareCompareBtn" class="btn btn-primary">Compare</button>
+          </div>
+          <div id="shareDiffWrap" class="share-diff-wrap" hidden>
+            <p id="shareDiffSummary" class="share-hint"></p>
+            <div class="share-diff-bulk-actions">
+              <button type="button" id="shareDiffKeepAllBtn" class="btn btn-ghost">Keep all mine</button>
+              <button type="button" id="shareDiffTakeAllBtn" class="btn btn-ghost">Take all theirs</button>
+            </div>
+            <ul id="shareDiffList" class="share-diff-list"></ul>
+            <button type="button" id="shareApplyBtn" class="btn btn-primary share-apply-btn">Apply selected</button>
+            <p id="shareApplyStatus" class="share-hint" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <!--
     ?v=N cache-busts these files across deploys. There's no build step here,
     so browsers can otherwise keep serving a stale cached copy of one file
@@ -144,8 +197,9 @@
     separate ?v= in the import specifier — bump that one too on changes to
     wp-card-utils.js. Same for scan.js and its card-matcher.js import.
   -->
-  <script type="module" src="app.js?v=9"></script>
+  <script type="module" src="app.js?v=10"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
+  <script type="module" src="share.js?v=1"></script>
 </body>
 </html>
