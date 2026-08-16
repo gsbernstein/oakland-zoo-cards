@@ -1,11 +1,22 @@
 // Oakland Zoo Trading Cards database.
 // Sourced from the official checklist published at oaklandzoo.org/cards
-// (TradingCards_CheckList PDF) and the trading card library pages, cross-referenced
-// against oaklandzoo.org/trading-card-category/* archive pages for card numbers and
-// photos. New cards rotate monthly at the zoo, so this list can be edited below as
-// new sets are announced. Cards without a confirmed `number` or `image` were not
-// found on the site at time of writing (e.g. the Boo at the Zoo, Oakland Roots &
-// Soul, and ZooCamp special editions have no dedicated category page).
+// (TradingCards_CheckList PDF) and oaklandzoo.org's public WP REST API
+// (/wp-json/wp/v2/trading_card), which backs the trading-card-category
+// archive pages. Each card's collector number lives in its image's title
+// metadata (e.g. "18 of 100 - Condor"); alt text is empty for all images.
+// `number` is only set where that "N of 100" pattern is present live on
+// the site today — none of the special/limited-edition sets (Coexist CA,
+// Protect the Pride, Tortugas de Guatemala, Special Edition) currently
+// carry live numbering, even though the older printed PDF checklist
+// numbered some of them. `image` is only set where the site has a live
+// photo; cards without one (Ball (Royal) Python, and the Boo at the Zoo /
+// Oakland Roots & Soul / ZooCamp special editions, none of which have a
+// dedicated live category) fall back to a placeholder in the UI.
+// protect-the-pride's dedicated category currently only lists African
+// Lion live; Meerkat and Warthog for that same set appear under the
+// special-edition catch-all category instead — a live-site categorization
+// quirk, not a data-entry omission. New cards rotate monthly at the zoo,
+// so this list (and the above caveats) may need revisiting over time.
 
 const OAKLAND_ZOO_CARD_SETS = [
   {
