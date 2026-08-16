@@ -1,1 +1,63 @@
-{}
+{
+  "_note": "Manually seeded entries (file pointing directly at the live URL, no sourceUrl) are a stopgap until scripts/refresh-image-cache.js actually runs for real — leaving sourceUrl unset/mismatched forces that next run to redownload and replace \"file\" with a proper local cache/images/ path instead of treating these as already correctly cached.",
+  "standard::Gray Wolf": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/02/1-of-100-Gray-Wolf.webp",
+    "manual": true
+  },
+  "standard::Tiger": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/02/688becc3ab5e0116cf83d4e1_8-of-100-Tiger.webp",
+    "manual": true
+  },
+  "standard::Yellow-Billed Stork": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/31-of-100-Yellow-Billed-Stork.webp",
+    "manual": true
+  },
+  "standard::Green Mantella Frog": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/36-of-100-Green-Mantella.webp",
+    "manual": true
+  },
+  "standard::Lilac-Crowned Amazon": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/38-of-100-Lilac-Amazon.webp",
+    "manual": true
+  },
+  "standard::Blue and Gold Macaw": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/49-of-100-Blue-and-Gold-Macaw.webp",
+    "manual": true
+  },
+  "standard::Siamang": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/61-of-100-Siamang.webp",
+    "manual": true
+  },
+  "standard::White-Faced Whistling Duck": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/70-of-100-White-Faced-Whistling-Duck.webp",
+    "manual": true
+  },
+  "standard::Blue-Fronted Amazon": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/72-of-100-Blue-Fronted-Amazon.webp",
+    "manual": true
+  },
+  "standard::Sudan Plated Lizard": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/80-of-100-Sudan-Plated-Lizard.webp",
+    "manual": true
+  },
+  "standard::Chinese Giant Tiger Leg Centipede": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/85-of-100-Chinese-Tiger-Centipede.webp",
+    "manual": true
+  },
+  "standard::LaMancha Goat": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/04/95-of-100-LaMancha-Goat.webp",
+    "manual": true
+  }
+}
