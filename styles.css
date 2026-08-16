@@ -64,6 +64,44 @@ body {
   opacity: 0.85;
 }
 
+.data-source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.data-source-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.data-source-badge.is-checking {
+  color: #fff;
+  opacity: 0.85;
+}
+
+.data-source-badge.is-live {
+  color: #eafff0;
+  background: rgba(64, 200, 120, 0.28);
+  border-color: rgba(140, 230, 170, 0.5);
+}
+
+.data-source-badge.is-cached {
+  color: #ffe9d1;
+  background: rgba(224, 129, 42, 0.3);
+  border-color: rgba(240, 170, 100, 0.5);
+}
+
 .btn {
   border: none;
   border-radius: 999px;

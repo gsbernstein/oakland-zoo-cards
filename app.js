@@ -13,6 +13,15 @@
   const progressPercentEl = document.getElementById("progressPercent");
   const progressBarFill = document.getElementById("progressBarFill");
   const syncStatusEl = document.getElementById("syncStatus");
+  const dataSourceBadge = document.getElementById("dataSourceBadge");
+  const dataSourceLabel = dataSourceBadge.querySelector(".data-source-label");
+
+  function setDataSourceBadge(state, label, title) {
+    dataSourceBadge.classList.remove("is-checking", "is-live", "is-cached");
+    dataSourceBadge.classList.add("is-" + state);
+    dataSourceLabel.textContent = label;
+    dataSourceBadge.title = title || "";
+  }
 
   // Populated by init() from data.json. Declared here (not just as a
   // window global) so every function in this file sees the same live
@@ -358,8 +367,20 @@
         syncStatusEl.textContent = changed
           ? "Synced with the zoo's live card list just now."
           : "Checked the zoo's live card list — already up to date.";
+        setDataSourceBadge(
+          "live",
+          "Live",
+          changed
+            ? "Numbers/photos just refreshed from oaklandzoo.org's live card list."
+            : "Confirmed up to date with oaklandzoo.org's live card list."
+        );
       } else {
         syncStatusEl.textContent = "Showing the saved card snapshot (live sync unavailable).";
+        setDataSourceBadge(
+          "cached",
+          "Cached snapshot",
+          "Couldn't reach oaklandzoo.org's live card list — showing the saved data.json snapshot instead."
+        );
         if (err) console.warn("Oakland Zoo live sync failed:", err);
       }
     },
@@ -377,8 +398,13 @@
       console.error("Failed to load data.json:", err);
       emptyState.hidden = false;
       emptyState.textContent = "Couldn't load the card data (data.json). Try refreshing the page.";
+      setDataSourceBadge("cached", "Failed to load", "Couldn't load data.json at all.");
       return;
     }
+
+    // What's rendered right now is the snapshot; live-sync.js may upgrade
+    // this to "Live" shortly (see onSyncResult above).
+    setDataSourceBadge("checking", "Checking live status…", "Showing the saved data.json snapshot for now.");
 
     // Expose the same array reference globally so live-sync.js can merge
     // fresher numbers/photos into it in place.
