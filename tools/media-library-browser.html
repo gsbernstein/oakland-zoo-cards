@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oakland Zoo Media Library Browser</title>
+<style>
+  :root {
+    --oz-green: #1f6b3a;
+    --border: #d8e2da;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f6f9f5;
+    color: #1f2a24;
+  }
+  header {
+    background: var(--oz-green);
+    color: white;
+    padding: 16px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0 0 10px; font-size: 1.3rem; }
+  .controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  #searchBox {
+    flex: 1;
+    min-width: 220px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+  }
+  #status {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+  button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    background: white;
+    color: var(--oz-green);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.5; cursor: default; }
+  #progressTrack {
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  #progressFill {
+    height: 100%;
+    width: 0%;
+    background: #ffcf5c;
+    transition: width 0.2s ease;
+  }
+  main {
+    padding: 16px 20px 60px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    background: #eef3ee;
+  }
+  .card .meta {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .card .id {
+    color: #5a6b60;
+    font-weight: 600;
+  }
+  .card a {
+    color: var(--oz-green);
+    text-decoration: none;
+  }
+  .card a:hover { text-decoration: underline; }
+  .highlight { background: #fff3b0; }
+  #emptyState {
+    text-align: center;
+    color: #5a6b60;
+    padding: 60px 0;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🦁 Oakland Zoo Media Library Browser</h1>
+  <div class="controls">
+    <input type="search" id="searchBox" placeholder="Filter by title/filename (e.g. 'of 100', 'condor', 'unavailable')..." disabled />
+    <label style="font-size:0.85rem; display:flex; align-items:center; gap:6px; white-space:nowrap;">
+      <input type="checkbox" id="showKnownToggle" /> Show already-known images too
+    </label>
+    <span id="status">Loading page 1 / 25...</span>
+    <button id="stopBtn">Stop Loading</button>
+  </div>
+  <div id="progressTrack"><div id="progressFill"></div></div>
+</header>
+<main>
+  <div class="grid" id="grid"></div>
+  <p id="emptyState">No images match your filter.</p>
+</main>
+
+<script>
+  const API_BASE = "https://www.oaklandzoo.org/wp-json/wp/v2/media";
+  const TOTAL_PAGES = 25;
+  const PER_PAGE = 100;
+
+  // Media IDs already identified as a trading card's currently-featured image
+  // (across all 10 category pages: 1-20, 21-40, 41-60, 61-80, 81-100,
+  // city-of-oakland, coexist-ca, protect-the-pride, tortugas-de-guatemala,
+  // special-edition) plus the 12 "hidden" numbered photos already found via
+  // the "of 100" media-library search. These are excluded by default so you
+  // can focus on scanning only the images that haven't been checked yet.
+  const KNOWN_MEDIA_IDS = new Set([
+    // 1-20
+    7636,3405,7405,3398,3394,3390,3385,3387,3379,3376,3373,3352,3357,3360,3362,3364,3366,3368,3370,
+    // 21-40
+    3466,3463,3460,3457,3454,3451,3448,3445,3442,3439,3436,3432,3421,7633,3415,3410,7638,3425,3427,3429,
+    // 41-60
+    3536,3531,3516,3526,3522,3534,3533,3511,7637,3504,7400,7629,7402,3491,3489,7634,3481,3478,3475,3472,3469,
+    // 61-80
+    3604,3601,3598,7631,3592,3589,3586,3583,3580,3577,3574,3571,3568,3565,3562,3560,3556,3553,3551,3539,3542,3545,
+    // 81-100
+    4073,4070,4067,4064,4058,7401,4051,4047,4042,4038,7632,3635,3632,3629,3626,7630,3618,3617,3614,3611,3608,
+    // coexist-ca
+    4194,4191,4188,4185,4182,4178,4174,4171,4168,4162,4150,4157,4145,4140,4136,4133,4130,4125,4121,4117,4113,4110,4107,4102,4094,
+    // special-edition
+    5054,5051,5044,5039,5036,5032,4990,4987,
+    // protect-the-pride
+    5048,
+    // city-of-oakland
+    4291,4289,4285,4282,4280,4277,4273,4271,4267,4264,4261,7403,4255,4248,4250,4244,4240,
+    // tortugas-de-guatemala
+    4234,4230,4226,4223,4220,
+    // hidden "N of 100" photos already discovered via search
+    7413,7412,7411,7410,7409,7408,7407,7406,4054,3606,3495,1844,
+  ]);
+
+  const grid = document.getElementById("grid");
+  const searchBox = document.getElementById("searchBox");
+  const status = document.getElementById("status");
+  const progressFill = document.getElementById("progressFill");
+  const stopBtn = document.getElementById("stopBtn");
+  const emptyState = document.getElementById("emptyState");
+  const showKnownToggle = document.getElementById("showKnownToggle");
+
+  let allItems = [];
+  let stopped = false;
+  let knownSkippedCount = 0;
+
+  function renderItem(item) {
+    const el = document.createElement("div");
+    el.className = "card";
+    el.dataset.search = (item.title + " " + item.url).toLowerCase();
+    el.dataset.known = item.known ? "1" : "0";
+    if (item.known && !showKnownToggle.checked) {
+      el.style.display = "none";
+    }
+    el.innerHTML = `
+      <img src="${item.thumb}" loading="lazy" alt="${escapeHtml(item.title)}" />
+      <div class="meta">
+        <div class="id">#${item.id}</div>
+        <div>${escapeHtml(item.title)}</div>
+        <a href="${item.url}" target="_blank" rel="noopener">full image ↗</a>
+      </div>
+    `;
+    grid.appendChild(el);
+  }
+
+  function escapeHtml(str) {
+    const d = document.createElement("div");
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  async function loadPage(page) {
+    const url = `${API_BASE}?per_page=${PER_PAGE}&page=${page}&_fields=id,title,source_url,media_details`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    for (const item of data) {
+      if (!item.source_url) continue;
+      const sizes = (item.media_details && item.media_details.sizes) || {};
+      const thumb = (sizes.thumbnail && sizes.thumbnail.source_url) ||
+                    (sizes.medium && sizes.medium.source_url) ||
+                    item.source_url;
+      const known = KNOWN_MEDIA_IDS.has(item.id);
+      if (known) knownSkippedCount++;
+      const entry = {
+        id: item.id,
+        title: (item.title && item.title.rendered) || "",
+        url: item.source_url,
+        thumb,
+        known,
+      };
+      allItems.push(entry);
+      renderItem(entry);
+    }
+  }
+
+  async function loadAll() {
+    for (let page = 1; page <= TOTAL_PAGES; page++) {
+      if (stopped) break;
+      status.textContent = `Loading page ${page} / ${TOTAL_PAGES}...`;
+      progressFill.style.width = (page / TOTAL_PAGES * 100) + "%";
+      try {
+        await loadPage(page);
+      } catch (e) {
+        status.textContent = `Error on page ${page}: ${e.message}. Stopping.`;
+        break;
+      }
+    }
+    updateStatus();
+    searchBox.disabled = false;
+    stopBtn.disabled = true;
+  }
+
+  function updateStatus() {
+    const shown = showKnownToggle.checked ? allItems.length : allItems.length - knownSkippedCount;
+    status.textContent = `Loaded ${allItems.length} images (${knownSkippedCount} already known${showKnownToggle.checked ? ", shown" : ", hidden"} — ${shown} to review).`;
+  }
+
+  stopBtn.addEventListener("click", () => {
+    stopped = true;
+    updateStatus();
+    searchBox.disabled = false;
+    stopBtn.disabled = true;
+  });
+
+  showKnownToggle.addEventListener("change", () => {
+    applyFilters();
+    updateStatus();
+  });
+
+  function applyFilters() {
+    const term = searchBox.value.trim().toLowerCase();
+    const showKnown = showKnownToggle.checked;
+    let visibleCount = 0;
+    document.querySelectorAll(".card").forEach((card) => {
+      const isKnown = card.dataset.known === "1";
+      const matchesSearch = !term || card.dataset.search.includes(term);
+      const visible = matchesSearch && (showKnown || !isKnown);
+      card.style.display = visible ? "" : "none";
+      card.classList.toggle("highlight", !!term && visible);
+      if (visible) visibleCount++;
+    });
+    emptyState.style.display = visibleCount === 0 ? "block" : "none";
+  }
+
+  searchBox.addEventListener("input", applyFilters);
+
+  loadAll();
+</script>
+</body>
+</html>
