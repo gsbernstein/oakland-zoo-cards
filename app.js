@@ -200,7 +200,10 @@
         if (isUnavailable(card)) {
           const badge = document.createElement("span");
           badge.className = "card-thumb-badge";
-          badge.textContent = "\u{1F551}"; // clock face, unobtrusive "not currently available" marker
+          // Plain monochrome clock icon (inherits color: currentColor) rather
+          // than a colorful emoji, to stay visually unobtrusive.
+          badge.innerHTML =
+            '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.75V8l2.25 1.25"/></svg>';
           badge.setAttribute("role", "img");
           badge.setAttribute("aria-label", "Currently unavailable at the zoo");
           badge.title = "Currently unavailable at the zoo";
