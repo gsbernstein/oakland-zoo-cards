@@ -49,6 +49,9 @@
     return setId + "::" + cardName;
   }
 
+  const PAW_PLACEHOLDER =
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e9dfc9'/%3E%3Ctext x='50' y='62' font-size='44' text-anchor='middle'%3E%F0%9F%90%BE%3C/text%3E%3C/svg%3E";
+
   function populateSetFilter() {
     OAKLAND_ZOO_CARD_SETS.forEach((set) => {
       const opt = document.createElement("option");
@@ -90,11 +93,11 @@
       const list = document.createElement("div");
       list.className = "card-list";
 
-      set.cards.forEach((cardName) => {
-        const key = cardKey(set.id, cardName);
+      set.cards.forEach((card) => {
+        const key = cardKey(set.id, card.name);
         const item = document.createElement("label");
         item.className = "card-item";
-        item.dataset.cardName = cardName.toLowerCase();
+        item.dataset.cardName = card.name.toLowerCase();
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -111,12 +114,33 @@
           applyFilters();
         });
 
+        const thumb = document.createElement("img");
+        thumb.className = "card-thumb";
+        thumb.src = card.image || PAW_PLACEHOLDER;
+        thumb.loading = "lazy";
+        thumb.alt = "";
+        thumb.addEventListener("error", () => {
+          thumb.src = PAW_PLACEHOLDER;
+        });
+
+        const textWrap = document.createElement("span");
+        textWrap.className = "card-text";
+
+        if (card.number != null) {
+          const numberSpan = document.createElement("span");
+          numberSpan.className = "card-number";
+          numberSpan.textContent = "#" + card.number;
+          textWrap.appendChild(numberSpan);
+        }
+
         const nameSpan = document.createElement("span");
         nameSpan.className = "card-name";
-        nameSpan.textContent = cardName;
+        nameSpan.textContent = card.name;
+        textWrap.appendChild(nameSpan);
 
         item.appendChild(checkbox);
-        item.appendChild(nameSpan);
+        item.appendChild(thumb);
+        item.appendChild(textWrap);
         list.appendChild(item);
       });
 
@@ -132,7 +156,7 @@
     const set = OAKLAND_ZOO_CARD_SETS.find((s) => s.id === setId);
     if (!set) return;
     const total = set.cards.length;
-    const ownedCount = set.cards.filter((name) => owned[cardKey(setId, name)]).length;
+    const ownedCount = set.cards.filter((card) => owned[cardKey(setId, card.name)]).length;
     const pct = total === 0 ? 0 : Math.round((ownedCount / total) * 100);
 
     const setCard = setsContainer.querySelector(`[data-set-id="${cssEscape(setId)}"]`);
@@ -148,7 +172,7 @@
     let ownedTotal = 0;
     OAKLAND_ZOO_CARD_SETS.forEach((set) => {
       total += set.cards.length;
-      ownedTotal += set.cards.filter((name) => owned[cardKey(set.id, name)]).length;
+      ownedTotal += set.cards.filter((card) => owned[cardKey(set.id, card.name)]).length;
     });
     const pct = total === 0 ? 0 : Math.round((ownedTotal / total) * 100);
     ownedCountEl.textContent = ownedTotal;
