@@ -955,6 +955,22 @@ body {
   margin: 0;
 }
 
+.share-diff-row-not-found {
+  border-style: dashed;
+  background: var(--oz-sky);
+}
+
+.share-diff-not-found-note {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 4px 8px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  cursor: help;
+}
+
 .share-apply-btn {
   width: 100%;
 }

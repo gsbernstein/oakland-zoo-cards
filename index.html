@@ -23,7 +23,8 @@
       </div>
       <div class="header-actions">
         <button id="scanBtn" class="btn btn-ghost" title="Scan a card with your camera">📷 Scan a Card</button>
-        <button id="shareBtn" class="btn btn-ghost" title="Share your collection or bring in someone else's">🔗 Share</button>
+        <button id="syncBtn" class="btn btn-ghost" title="Send your collection or bring in someone else's">🔗 Sync</button>
+        <button id="bragBtn" class="btn btn-ghost" title="Share a progress snapshot">🏆 Brag</button>
         <button id="resetBtn" class="btn btn-ghost" title="Clear all checked cards">Reset All</button>
       </div>
     </div>
@@ -135,54 +136,67 @@
     </div>
   </div>
 
-  <div id="shareModalOverlay" class="modal-overlay" hidden>
-    <div class="modal-dialog share-dialog" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
-      <button type="button" id="shareCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+  <div id="syncModalOverlay" class="modal-overlay" hidden>
+    <div class="modal-dialog share-dialog" role="dialog" aria-modal="true" aria-labelledby="syncTitle">
+      <button type="button" id="syncCloseBtn" class="modal-close" aria-label="Close">&times;</button>
       <div class="share-body">
-        <h3 id="shareTitle" class="share-title">Share & Sync</h3>
+        <h3 id="syncTitle" class="share-title">Sync Collections</h3>
 
         <section class="share-section">
-          <h4 class="share-section-title">Send your collection</h4>
+          <h4 class="share-section-title">Copy my collection</h4>
           <p class="share-hint">
-            Share this link with your family. Opening it shows a card-by-card diff so they can
-            pick which of your counts to bring in — nothing changes automatically.
+            This link encodes exactly what you own. Share it with your family — opening it shows
+            a card-by-card diff so they can pick which of your counts to bring in. Nothing
+            changes automatically.
           </p>
           <div class="share-link-row">
-            <input type="text" id="shareLinkInput" class="share-link-input" readonly />
-            <button type="button" id="shareCopyBtn" class="btn btn-primary">Copy</button>
+            <input type="text" id="syncLinkInput" class="share-link-input" readonly />
+            <button type="button" id="syncCopyBtn" class="btn btn-primary">Copy</button>
           </div>
-          <button type="button" id="shareNativeBtn" class="btn btn-ghost share-native-btn" hidden>Share…</button>
-        </section>
-
-        <section class="share-section">
-          <h4 class="share-section-title">Share a snapshot image</h4>
-          <div class="share-image-wrap">
-            <img id="shareImagePreview" class="share-image-preview" alt="Your collection progress" />
-          </div>
-          <div class="share-image-actions">
-            <a id="shareImageDownloadBtn" class="btn btn-ghost" download="oakland-zoo-cards.png">Download</a>
-            <button type="button" id="shareImageShareBtn" class="btn btn-ghost" hidden>Share image…</button>
-          </div>
+          <button type="button" id="syncNativeBtn" class="btn btn-ghost share-native-btn" hidden>Share…</button>
         </section>
 
         <section class="share-section">
           <h4 class="share-section-title">Bring in someone else's collection</h4>
           <p class="share-hint">Paste a link or code they sent you.</p>
           <div class="share-import-row">
-            <input type="text" id="shareImportInput" class="share-link-input" placeholder="Paste a share link or code…" />
-            <button type="button" id="shareCompareBtn" class="btn btn-primary">Compare</button>
+            <input type="text" id="syncImportInput" class="share-link-input" placeholder="Paste a share link or code…" />
+            <button type="button" id="syncCompareBtn" class="btn btn-primary">Compare</button>
           </div>
-          <div id="shareDiffWrap" class="share-diff-wrap" hidden>
-            <p id="shareDiffSummary" class="share-hint"></p>
+          <div id="syncDiffWrap" class="share-diff-wrap" hidden>
+            <p id="syncDiffSummary" class="share-hint"></p>
             <div class="share-diff-bulk-actions">
-              <button type="button" id="shareDiffKeepAllBtn" class="btn btn-ghost">Keep all mine</button>
-              <button type="button" id="shareDiffTakeAllBtn" class="btn btn-ghost">Take all theirs</button>
+              <button type="button" id="syncDiffKeepAllBtn" class="btn btn-ghost">Keep all mine</button>
+              <button type="button" id="syncDiffTakeAllBtn" class="btn btn-ghost">Take all theirs</button>
             </div>
-            <ul id="shareDiffList" class="share-diff-list"></ul>
-            <button type="button" id="shareApplyBtn" class="btn btn-primary share-apply-btn">Apply selected</button>
-            <p id="shareApplyStatus" class="share-hint" aria-live="polite"></p>
+            <ul id="syncDiffList" class="share-diff-list"></ul>
+            <button type="button" id="syncApplyBtn" class="btn btn-primary share-apply-btn">Apply selected</button>
+            <p id="syncApplyStatus" class="share-hint" aria-live="polite"></p>
           </div>
         </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="bragModalOverlay" class="modal-overlay" hidden>
+    <div class="modal-dialog share-dialog" role="dialog" aria-modal="true" aria-labelledby="bragTitle">
+      <button type="button" id="bragCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+      <div class="share-body">
+        <h3 id="bragTitle" class="share-title">Brag About Your Progress</h3>
+        <p class="share-hint">
+          Just a progress snapshot and a link to the site itself — no personal data, so it's safe
+          to post anywhere.
+        </p>
+        <div class="share-image-wrap">
+          <img id="bragImagePreview" class="share-image-preview" alt="Your collection progress" />
+        </div>
+        <div class="share-image-actions">
+          <a id="bragImageDownloadBtn" class="btn btn-ghost" download="oakland-zoo-cards.png">Download</a>
+          <button type="button" id="bragImageShareBtn" class="btn btn-ghost" hidden>Share image…</button>
+        </div>
+        <p class="share-hint">
+          Site: <a id="bragSiteLink" href="#" target="_blank" rel="noopener"></a>
+        </p>
       </div>
     </div>
   </div>
@@ -200,6 +214,7 @@
   <script type="module" src="app.js?v=10"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
-  <script type="module" src="share.js?v=1"></script>
+  <script type="module" src="sync.js?v=1"></script>
+  <script type="module" src="brag.js?v=1"></script>
 </body>
 </html>
