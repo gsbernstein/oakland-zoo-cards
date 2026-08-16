@@ -1,63 +1,182 @@
 {
-  "_note": "Manually seeded entries (file pointing directly at the live URL, no sourceUrl) are a stopgap until scripts/refresh-image-cache.js actually runs for real — leaving sourceUrl unset/mismatched forces that next run to redownload and replace \"file\" with a proper local cache/images/ path instead of treating these as already correctly cached.",
   "standard::Gray Wolf": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/02/1-of-100-Gray-Wolf.webp",
-    "manual": true
+    "file": "cache/images/standard--gray-wolf.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/1-of-100-Gray-Wolf.webp"
+  },
+  "standard::Grizzly Bear": {
+    "tier": "available",
+    "file": "cache/images/standard--grizzly-bear.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/5-of-100-Grizzly-Bear.webp"
   },
   "standard::Tiger": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/02/688becc3ab5e0116cf83d4e1_8-of-100-Tiger.webp",
-    "manual": true
+    "file": "cache/images/standard--tiger.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/688becc3ab5e0116cf83d4e1_8-of-100-Tiger.webp"
+  },
+  "standard::Chimpanzee": {
+    "tier": "available",
+    "file": "cache/images/standard--chimpanzee.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/12-of-100-Chimpanzee.webp"
+  },
+  "standard::California Condor": {
+    "tier": "available",
+    "file": "cache/images/standard--california-condor.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/18-of-100-Condor.webp"
+  },
+  "standard::Spotted Hyena": {
+    "tier": "available",
+    "file": "cache/images/standard--spotted-hyena.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/20-of-100-Hyena.webp"
+  },
+  "standard::Southern Pudu": {
+    "tier": "available",
+    "file": "cache/images/standard--southern-pudu.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/22-of-100-Pudu.webp"
+  },
+  "standard::Leaf-Cutter Ant": {
+    "tier": "available",
+    "file": "cache/images/standard--leaf-cutter-ant.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/24-of-100-Leaf-Cutter-Ant.webp"
+  },
+  "standard::Jaguar": {
+    "tier": "available",
+    "file": "cache/images/standard--jaguar.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/25-of-100-Jaguar.webp"
+  },
+  "standard::Colorado River Toad": {
+    "tier": "available",
+    "file": "cache/images/standard--colorado-river-toad.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/26-of-100-Colorado-River-Toad.webp"
+  },
+  "standard::Cotton-Top Tamarin": {
+    "tier": "available",
+    "file": "cache/images/standard--cotton-top-tamarin.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/29-of-100-Tamarin.webp"
   },
   "standard::Yellow-Billed Stork": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/31-of-100-Yellow-Billed-Stork.webp",
-    "manual": true
+    "file": "cache/images/standard--yellow-billed-stork.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/31-of-100-Yellow-Billed-Stork.webp"
   },
   "standard::Green Mantella Frog": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/36-of-100-Green-Mantella.webp",
-    "manual": true
+    "file": "cache/images/standard--green-mantella-frog.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/36-of-100-Green-Mantella.webp"
   },
   "standard::Lilac-Crowned Amazon": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/38-of-100-Lilac-Amazon.webp",
-    "manual": true
+    "file": "cache/images/standard--lilac-crowned-amazon.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/38-of-100-Lilac-Amazon.webp"
+  },
+  "standard::Hamerkop": {
+    "tier": "available",
+    "file": "cache/images/standard--hamerkop.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/42-of-100-Hamerkop.webp"
+  },
+  "standard::Madagascar Hissing Cockroach": {
+    "tier": "available",
+    "file": "cache/images/standard--madagascar-hissing-cockroach.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/46-of-100-Madagascar-Hissing-Cockroach.webp"
+  },
+  "standard::Dromedary Camel": {
+    "tier": "available",
+    "file": "cache/images/standard--dromedary-camel.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/47-of-100-Dromedary-Camel.webp"
   },
   "standard::Blue and Gold Macaw": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/49-of-100-Blue-and-Gold-Macaw.webp",
-    "manual": true
+    "file": "cache/images/standard--blue-and-gold-macaw.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/49-of-100-Blue-and-Gold-Macaw.webp"
+  },
+  "standard::Pancake Tortoise": {
+    "tier": "available",
+    "file": "cache/images/standard--pancake-tortoise.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/50-of-100-Pancake-Tortoise.webp"
+  },
+  "standard::Guinea Forest Hog": {
+    "tier": "available",
+    "file": "cache/images/standard--guinea-forest-hog.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/51-of-100-Guinea-Forest-Hog.webp"
+  },
+  "standard::Squirrel Monkey": {
+    "tier": "available",
+    "file": "cache/images/standard--squirrel-monkey.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/53-of-100-Squirrel-Monkey.webp"
+  },
+  "standard::Pied Crow": {
+    "tier": "available",
+    "file": "cache/images/standard--pied-crow.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/55-of-100-Pied-Crow.webp"
+  },
+  "standard::Hadada Ibis": {
+    "tier": "available",
+    "file": "cache/images/standard--hadada-ibis.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/57-of-100-Hadada-Ibis.webp"
   },
   "standard::Siamang": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/61-of-100-Siamang.webp",
-    "manual": true
+    "file": "cache/images/standard--siamang.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/61-of-100-Siamang.webp"
+  },
+  "standard::Hooded Vulture": {
+    "tier": "available",
+    "file": "cache/images/standard--hooded-vulture.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/63-of-100-Hooded-Vulture.webp"
+  },
+  "standard::Henkel's Leaf-Tailed Gecko": {
+    "tier": "available",
+    "file": "cache/images/standard--henkel-s-leaf-tailed-gecko.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/64-of-100-Leaf-Tailed-Gecko.webp"
+  },
+  "standard::Emu": {
+    "tier": "available",
+    "file": "cache/images/standard--emu.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/65-of-100-Emu.webp"
+  },
+  "standard::Military Macaw": {
+    "tier": "available",
+    "file": "cache/images/standard--military-macaw.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/68-of-100-Military-Macaw.webp"
   },
   "standard::White-Faced Whistling Duck": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/70-of-100-White-Faced-Whistling-Duck.webp",
-    "manual": true
+    "file": "cache/images/standard--white-faced-whistling-duck.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/70-of-100-White-Faced-Whistling-Duck.webp"
   },
   "standard::Blue-Fronted Amazon": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/72-of-100-Blue-Fronted-Amazon.webp",
-    "manual": true
+    "file": "cache/images/standard--blue-fronted-amazon.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/72-of-100-Blue-Fronted-Amazon.webp"
+  },
+  "standard::Dermestid Beetle": {
+    "tier": "available",
+    "file": "cache/images/standard--dermestid-beetle.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/77-of-100-Dermestid-Beetle.webp"
   },
   "standard::Sudan Plated Lizard": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/80-of-100-Sudan-Plated-Lizard.webp",
-    "manual": true
+    "file": "cache/images/standard--sudan-plated-lizard.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/80-of-100-Sudan-Plated-Lizard.webp"
   },
   "standard::Chinese Giant Tiger Leg Centipede": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/03/85-of-100-Chinese-Tiger-Centipede.webp",
-    "manual": true
+    "file": "cache/images/standard--chinese-giant-tiger-leg-centipede.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/85-of-100-Chinese-Tiger-Centipede.webp"
+  },
+  "standard::Panamanian Golden Frog": {
+    "tier": "available",
+    "file": "cache/images/standard--panamanian-golden-frog.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/89-of-100-Panamanian-Golden-Frog.webp"
+  },
+  "standard::Madagascar Sacred Ibis": {
+    "tier": "available",
+    "file": "cache/images/standard--madagascar-sacred-ibis.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/90-of-100-Madagascar-Sacred-Ibis.webp"
   },
   "standard::LaMancha Goat": {
     "tier": "available",
-    "file": "https://www.oaklandzoo.org/app/uploads/2026/04/95-of-100-LaMancha-Goat.webp",
-    "manual": true
+    "file": "cache/images/standard--lamancha-goat.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/04/95-of-100-LaMancha-Goat.webp"
   }
 }
