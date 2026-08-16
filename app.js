@@ -14,6 +14,12 @@
   const progressBarFill = document.getElementById("progressBarFill");
   const syncStatusEl = document.getElementById("syncStatus");
 
+  // Populated by init() from data.json. Declared here (not just as a
+  // window global) so every function in this file sees the same live
+  // reference via closure; also mirrored onto window.OAKLAND_ZOO_CARD_SETS
+  // so live-sync.js (a separate script) can read/mutate the same array.
+  let OAKLAND_ZOO_CARD_SETS = [];
+
   let owned = loadOwned();
   let collapsed = loadCollapsed();
   let searchTerm = "";
@@ -338,10 +344,10 @@
     applyFilters();
   }
 
-  // Hook for live-sync.js: this file always renders the bundled data.js
-  // snapshot first (so the page is instant and works with no network at
-  // all), then live-sync.js tries to refresh card numbers/photos from the
-  // zoo's live API in the background and reports back here.
+  // Hook for live-sync.js: this file always renders the data.json snapshot
+  // first (fetched from the same origin, so it works with no other network
+  // access at all), then live-sync.js tries to refresh card numbers/photos
+  // from the zoo's live API in the background and reports back here.
   window.__oaklandZooChecklist = {
     onSyncResult(ok, changed, err) {
       if (ok) {
@@ -356,6 +362,27 @@
     },
   };
 
-  populateSetFilter();
-  renderAll();
+  async function init() {
+    try {
+      const res = await fetch("data.json");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      OAKLAND_ZOO_CARD_SETS = Array.isArray(data.sets) ? data.sets : [];
+    } catch (err) {
+      console.error("Failed to load data.json:", err);
+      emptyState.hidden = false;
+      emptyState.textContent = "Couldn't load the card data (data.json). Try refreshing the page.";
+      return;
+    }
+
+    // Expose the same array reference globally so live-sync.js can merge
+    // fresher numbers/photos into it in place.
+    window.OAKLAND_ZOO_CARD_SETS = OAKLAND_ZOO_CARD_SETS;
+
+    populateSetFilter();
+    renderAll();
+    document.dispatchEvent(new CustomEvent("oaklandzoo:data-ready"));
+  }
+
+  init();
 })();

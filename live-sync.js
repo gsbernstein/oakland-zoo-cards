@@ -156,5 +156,12 @@
     }
   }
 
-  attemptLiveSync();
+  // app.js fetches data.json asynchronously before OAKLAND_ZOO_CARD_SETS
+  // exists at all, so wait for its ready signal if we've beaten it here
+  // rather than racing against that fetch.
+  if (window.OAKLAND_ZOO_CARD_SETS && window.OAKLAND_ZOO_CARD_SETS.length) {
+    attemptLiveSync();
+  } else {
+    document.addEventListener("oaklandzoo:data-ready", attemptLiveSync, { once: true });
+  }
 })();
