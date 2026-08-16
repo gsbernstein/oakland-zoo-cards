@@ -21,7 +21,10 @@
           </span>
         </div>
       </div>
-      <button id="resetBtn" class="btn btn-ghost" title="Clear all checked cards">Reset All</button>
+      <div class="header-actions">
+        <button id="scanBtn" class="btn btn-ghost" title="Scan a card with your camera">📷 Scan a Card</button>
+        <button id="resetBtn" class="btn btn-ghost" title="Clear all checked cards">Reset All</button>
+      </div>
     </div>
   </header>
 
@@ -105,6 +108,32 @@
     </div>
   </div>
 
+  <div id="scanModalOverlay" class="modal-overlay" hidden>
+    <div class="modal-dialog scan-dialog" role="dialog" aria-modal="true" aria-labelledby="scanTitle">
+      <button type="button" id="scanCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+      <div class="scan-body">
+        <h3 id="scanTitle" class="scan-title">Scan a Card</h3>
+        <p class="scan-hint">
+          Take a photo of a card's name (or number), and this'll try to match it against the
+          checklist. Runs entirely in your browser — nothing is uploaded anywhere.
+        </p>
+
+        <div class="scan-preview-wrap" id="scanPreviewWrap" hidden>
+          <img id="scanPreviewImage" class="scan-preview-image" alt="Captured card photo" />
+        </div>
+
+        <label class="btn btn-primary scan-picker-label">
+          <input type="file" id="scanFileInput" accept="image/*" capture="environment" hidden />
+          <span id="scanPickerLabel">📷 Take or choose a photo</span>
+        </label>
+
+        <p id="scanStatus" class="scan-status" aria-live="polite"></p>
+
+        <ul id="scanResults" class="scan-results"></ul>
+      </div>
+    </div>
+  </div>
+
   <!--
     ?v=N cache-busts these files across deploys. There's no build step here,
     so browsers can otherwise keep serving a stale cached copy of one file
@@ -113,9 +142,10 @@
     on any change to app.js, live-sync.js, or styles.css. Both app.js and
     live-sync.js are modules and import wp-card-utils.js with its own
     separate ?v= in the import specifier — bump that one too on changes to
-    wp-card-utils.js.
+    wp-card-utils.js. Same for scan.js and its card-matcher.js import.
   -->
   <script type="module" src="app.js?v=9"></script>
   <script type="module" src="live-sync.js?v=9"></script>
+  <script type="module" src="scan.js?v=1"></script>
 </body>
 </html>

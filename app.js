@@ -534,6 +534,23 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
         if (err) console.warn("Oakland Zoo live sync failed:", err);
       }
     },
+    // Hook for scan.js: opens the same card detail modal the grid uses, for
+    // a card the OCR matcher identified rather than one the user tapped.
+    // Returns false if the card can't be found (shouldn't normally happen,
+    // since scan.js only ever passes back a (setId, name) pair it got from
+    // matching against this same OAKLAND_ZOO_CARD_SETS list).
+    openCardByKey(setId, cardName) {
+      const set = OAKLAND_ZOO_CARD_SETS.find((s) => s.id === setId);
+      const card = set && set.cards.find((c) => c.name === cardName);
+      if (!card) return false;
+      const item = setsContainer.querySelector(
+        `[data-set-id="${cssEscape(setId)}"] .card-item[data-card-name="${cssEscape(cardName.toLowerCase())}"]`
+      );
+      if (!item) return false;
+      const checkbox = item.querySelector("input[type=checkbox]");
+      openModal(setId, card, item, checkbox, cardKey(setId, cardName));
+      return true;
+    },
   };
 
   async function init() {
