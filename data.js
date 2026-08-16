@@ -1,0 +1,131 @@
+// Oakland Zoo Trading Cards database.
+// Sourced from the official checklist published at oaklandzoo.org/cards
+// (TradingCards_CheckList PDF) and the trading card library pages.
+// New cards rotate monthly at the zoo, so this list can be edited below
+// as new sets are announced.
+
+const OAKLAND_ZOO_CARD_SETS = [
+  {
+    id: "standard",
+    name: "Standard Cards",
+    description: "The core 100-card set found year-round at Keeper Talks and around the Zoo.",
+    cards: [
+      "Gray Wolf", "Aldabra Tortoise", "African Elephant", "Malayan Wreathed Hornbill",
+      "Grizzly Bear", "Meerkat", "Ring-Tailed Lemur", "Tiger", "Mountain Lion",
+      "Great Curassow", "American Alligator", "Chimpanzee", "Reticulated Giraffe",
+      "American Bison", "Giant African Millipede", "Ball (Royal) Python",
+      "White-Handed (Lar) Gibbon", "California Condor", "North American River Otter",
+      "Spotted Hyena", "Malayan Flying Fox", "Southern Pudu", "Superb Starling",
+      "Leaf-Cutter Ant", "Jaguar", "Colorado River Toad", "Common Wallaroo",
+      "Klipspringer", "Cotton-Top Tamarin", "Gila Monster", "Yellow-Billed Stork",
+      "Bald Eagle", "Nigerian Dwarf Goat", "Grant's Zebra", "Sun Bear",
+      "Green Mantella Frog", "Schmidt's Red-Tailed Monkey", "Lilac-Crowned Amazon",
+      "New Guinea Walking Stick", "Red-Tailed Hawk", "Eastern Box Turtle", "Hamerkop",
+      "Red-Rumped Agouti", "Black Tree Monitor", "Guira Cuckoo",
+      "Madagascar Hissing Cockroach", "Dromedary Camel", "Amazon Milk Tree Frog",
+      "Blue and Gold Macaw", "Pancake Tortoise", "Guinea Forest Hog", "Egyptian Goose",
+      "Squirrel Monkey", "Amazon Tree Boa", "Pied Crow", "Western Pond Turtle",
+      "Hadada Ibis", "Crowned Lemur", "Black-Throated Monitor",
+      "Malaysian Dead Leaf Mantis", "Siamang", "African Spurred Tortoise",
+      "Hooded Vulture", "Henkel's Leaf-Tailed Gecko", "Emu", "Warthog",
+      "Black Widow", "Military Macaw", "Shetland Sheep",
+      "White-Faced Whistling Duck", "Poison Dart Frog (Dyeing)",
+      "Poison Dart Frog (Green and Black)", "Poison Dart Frog (Yellow-Banded)",
+      "Blue-Fronted Amazon", "Eastern Lubber Grasshopper", "Rock Hyrax",
+      "Florida Red-Bellied Turtle", "American Black Bear", "Dermestid Beetle",
+      "Blue-Bellied Roller", "Colombian Red-Tailed Boa", "Sudan Plated Lizard",
+      "Black Beauty Walking Stick", "Taveta Golden Weaver", "Domestic Rabbit",
+      "Hamadryas Baboon (Male)", "Hamadryas Baboon (Female)",
+      "Chinese Giant Tiger Leg Centipede", "Red-Lored Amazon", "Chuckwalla",
+      "Speckled Pigeon", "Panamanian Golden Frog", "Madagascar Sacred Ibis",
+      "Spotted Turtle", "Agile Wallaby", "Caribbean Cave Cockroach",
+      "Blue Spiny Lizard", "LaMancha Goat", "Red-Bellied Parrot",
+      "Starry Night Reed Frog", "Green Anole", "Golden Silk Orb-Weaver",
+      "African Lion",
+    ],
+  },
+  {
+    id: "boo-at-the-zoo",
+    name: "Boo at the Zoo",
+    description: "Special edition",
+    cards: [
+      "Lesser Flamingo", "White-Handed (Lar) Gibbon", "Chimpanzee",
+      "American Alligator", "Caribbean Cave Cockroach",
+    ],
+  },
+  {
+    id: "city-of-oakland",
+    name: "City of Oakland",
+    description: "Special edition",
+    cards: [
+      "Black-Crowned Night Heron", "Black-Tailed Deer", "California Newt",
+      "California Scrub Jay", "Common Raven", "Convergent Lady Beetle", "Coyote",
+      "Eastern Fox Squirrel", "Mallard (Male)", "Mallard (Female)", "Opossum",
+      "Raccoon", "Ring-Necked Snake", "Sierran Chorus Frog", "Western Fence Lizard",
+      "Western Yellow Jacket", "Wild Turkey",
+    ],
+  },
+  {
+    id: "coexist-with-wildlife",
+    name: "Coexist with Wildlife California",
+    description: "Limited series",
+    cards: [
+      "California Grizzly Bear", "Desert Tortoise", "California Condor",
+      "Pallid Bat", "Whitebark Pine", "California Golden Trout", "Gray Wolf",
+      "California Tiger Salamander", "Monarch Butterfly", "Riparian Brush Rabbit",
+      "San Francisco Garter Snake", "Bakersfield Cactus", "California Black Bear",
+      "Sunflower Sea Star", "Spotted Owl", "Southern Sea Otter",
+      "Blunt-Nosed Leopard Lizard", "California Jewelflower", "Giant Kangaroo Rat",
+      "Franklin's Bumblebee", "Pacific Leatherback Sea Turtle", "Island Fox",
+      "Mountain Yellow-Legged Frog", "Giant Black Sea Bass", "Mountain Lion",
+    ],
+  },
+  {
+    id: "main-entrance",
+    name: "Main Entrance",
+    description: "Special edition",
+    cards: ["African Spoonbill", "Lesser Flamingo"],
+  },
+  {
+    id: "native-pollinators",
+    name: "Native Pollinators",
+    description: "Special edition",
+    cards: ["Anna's Hummingbird", "Monarch Butterfly", "Yellow-Faced Bumblebee"],
+  },
+  {
+    id: "oakland-ballers",
+    name: "Oakland Ballers",
+    description: "Special edition",
+    cards: ["'Possum"],
+  },
+  {
+    id: "oakland-roots-soul",
+    name: "Oakland Roots & Soul",
+    description: "Limited series",
+    cards: [
+      "Black-Crowned Night Heron", "Silver Lupine", "Western Pygmy Blue",
+      "Coast Live Oak",
+    ],
+  },
+  {
+    id: "protect-the-pride",
+    name: "Protect the Pride",
+    description: "Limited series",
+    cards: ["African Lion", "Meerkat", "Warthog"],
+  },
+  {
+    id: "tortugas-marinas",
+    name: "Tortugas Marinas de Guatemala",
+    description: "Limited series",
+    cards: [
+      "Tortuga Parlama", "Tortuga Baule", "Tortuga Verde", "Tortuga Carey",
+      "Olive Ridley Sea Turtle",
+    ],
+  },
+  {
+    id: "zoocamp",
+    name: "ZooCamp",
+    description: "Special edition",
+    cards: ["Black-Crowned Night Heron"],
+  },
+];

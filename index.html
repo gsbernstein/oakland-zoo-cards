@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oakland Zoo Card Checklist</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-emoji" aria-hidden="true">🦁</span>
+        <div>
+          <h1>Oakland Zoo Card Checklist</h1>
+          <p class="subtitle">Track your Oakland Zoo trading card collection</p>
+        </div>
+      </div>
+      <button id="resetBtn" class="btn btn-ghost" title="Clear all checked cards">Reset All</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="progress-panel" aria-label="Collection progress">
+      <div class="progress-summary">
+        <div class="progress-count">
+          <span id="ownedCount">0</span> / <span id="totalCount">0</span>
+          <span class="progress-label">cards collected</span>
+        </div>
+        <div class="progress-percent" id="progressPercent">0%</div>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Filter and search cards">
+      <input
+        type="search"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search cards by name..."
+        autocomplete="off"
+      />
+      <div class="filter-row">
+        <select id="setFilter" class="set-filter">
+          <option value="all">All Sets</option>
+        </select>
+        <div class="toggle-group" role="group" aria-label="Show which cards">
+          <button class="toggle-btn active" data-filter="all">All</button>
+          <button class="toggle-btn" data-filter="owned">Owned</button>
+          <button class="toggle-btn" data-filter="missing">Missing</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="setsContainer" class="sets-container"></div>
+
+    <p id="emptyState" class="empty-state" hidden>No cards match your search/filter.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Card list adapted from the official Oakland Zoo Trading Cards checklist.
+      New cards rotate monthly — edit <code>data.js</code> to keep this up to date.
+      See <a href="https://www.oaklandzoo.org/trading-cards" target="_blank" rel="noopener">oaklandzoo.org/trading-cards</a>.
+    </p>
+    <p class="storage-note">Your progress is saved automatically in this browser.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
