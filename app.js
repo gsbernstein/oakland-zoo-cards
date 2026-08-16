@@ -52,6 +52,58 @@
   const PAW_PLACEHOLDER =
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e9dfc9'/%3E%3Ctext x='50' y='62' font-size='44' text-anchor='middle'%3E%F0%9F%90%BE%3C/text%3E%3C/svg%3E";
 
+  // The zoo's own site names these image files with an "Unavailable" (or
+  // "Retired Unavailable") suffix for cards not currently in physical
+  // rotation, rendering the same grayed-out photo + notice we mirror here.
+  function isUnavailable(card) {
+    return !!card.image && /unavailable/i.test(card.image);
+  }
+
+  const modalOverlay = document.getElementById("cardModalOverlay");
+  const modalImage = document.getElementById("modalImage");
+  const modalSetName = document.getElementById("modalSetName");
+  const modalCardName = document.getElementById("modalCardName");
+  const modalNumberBadge = document.getElementById("modalNumberBadge");
+  const modalUnavailableBadge = document.getElementById("modalUnavailableBadge");
+  const modalOwnedCheckbox = document.getElementById("modalOwnedCheckbox");
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
+  let modalContext = null; // { setId, card, gridCheckbox }
+
+  function openModal(setId, card, gridCheckbox) {
+    modalContext = { setId, card, gridCheckbox };
+    modalImage.src = card.image || PAW_PLACEHOLDER;
+    modalImage.alt = card.name;
+    modalSetName.textContent = (OAKLAND_ZOO_CARD_SETS.find((s) => s.id === setId) || {}).name || "";
+    modalCardName.textContent = card.name;
+    if (card.number != null) {
+      modalNumberBadge.hidden = false;
+      modalNumberBadge.textContent = "#" + card.number;
+    } else {
+      modalNumberBadge.hidden = true;
+    }
+    modalUnavailableBadge.hidden = !isUnavailable(card);
+    modalOwnedCheckbox.checked = gridCheckbox.checked;
+    modalOverlay.hidden = false;
+  }
+
+  function closeModal() {
+    modalOverlay.hidden = true;
+    modalContext = null;
+  }
+
+  modalCloseBtn.addEventListener("click", closeModal);
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modalOverlay.hidden) closeModal();
+  });
+  modalOwnedCheckbox.addEventListener("change", () => {
+    if (!modalContext) return;
+    modalContext.gridCheckbox.checked = modalOwnedCheckbox.checked;
+    modalContext.gridCheckbox.dispatchEvent(new Event("change"));
+  });
+
   function populateSetFilter() {
     OAKLAND_ZOO_CARD_SETS.forEach((set) => {
       const opt = document.createElement("option");
@@ -114,13 +166,32 @@
           applyFilters();
         });
 
+        const thumbWrap = document.createElement("span");
+        thumbWrap.className = "card-thumb-wrap";
+
         const thumb = document.createElement("img");
         thumb.className = "card-thumb";
         thumb.src = card.image || PAW_PLACEHOLDER;
         thumb.loading = "lazy";
         thumb.alt = "";
+        if (isUnavailable(card)) thumb.classList.add("unavailable");
         thumb.addEventListener("error", () => {
           thumb.src = PAW_PLACEHOLDER;
+          thumb.classList.remove("unavailable");
+        });
+        thumbWrap.appendChild(thumb);
+
+        if (isUnavailable(card)) {
+          const badge = document.createElement("span");
+          badge.className = "card-thumb-badge";
+          badge.textContent = "Unavailable";
+          thumbWrap.appendChild(badge);
+        }
+
+        thumbWrap.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openModal(set.id, card, checkbox);
         });
 
         const textWrap = document.createElement("span");
@@ -139,7 +210,7 @@
         textWrap.appendChild(nameSpan);
 
         item.appendChild(checkbox);
-        item.appendChild(thumb);
+        item.appendChild(thumbWrap);
         item.appendChild(textWrap);
         list.appendChild(item);
       });

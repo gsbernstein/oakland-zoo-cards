@@ -69,6 +69,25 @@
     <p class="storage-note">Your progress is saved automatically in this browser.</p>
   </footer>
 
+  <div id="cardModalOverlay" class="modal-overlay" hidden>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalCardName">
+      <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-image-wrap">
+        <img id="modalImage" class="modal-image" src="" alt="" />
+        <span id="modalUnavailableBadge" class="modal-unavailable-badge" hidden>Currently Unavailable at the Zoo</span>
+      </div>
+      <div class="modal-info">
+        <div class="modal-set-name" id="modalSetName"></div>
+        <h3 id="modalCardName" class="modal-card-name"></h3>
+        <span id="modalNumberBadge" class="modal-number-badge" hidden></span>
+        <label class="modal-owned-toggle">
+          <input type="checkbox" id="modalOwnedCheckbox" />
+          <span>I have this card</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
