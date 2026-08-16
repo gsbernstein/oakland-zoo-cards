@@ -191,7 +191,10 @@
         if (isUnavailable(card)) {
           const badge = document.createElement("span");
           badge.className = "card-thumb-badge";
-          badge.textContent = "Unavailable";
+          badge.textContent = "\u{1F551}"; // clock face, unobtrusive "not currently available" marker
+          badge.setAttribute("role", "img");
+          badge.setAttribute("aria-label", "Currently unavailable at the zoo");
+          badge.title = "Currently unavailable at the zoo";
           thumbWrap.appendChild(badge);
         }
 
