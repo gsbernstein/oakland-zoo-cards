@@ -1,4 +1,4 @@
-import { isUnavailableImageUrl } from "./wp-card-utils.js?v=1";
+import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
 
 (function () {
   const STORAGE_KEY = "oaklandZooCardChecklist.v1";

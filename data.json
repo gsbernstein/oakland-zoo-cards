@@ -6,7 +6,8 @@
     "`image` is only set where the site has a live photo; cards without one (Ball (Royal) Python, and the Boo at the Zoo / Oakland Roots & Soul / ZooCamp special editions, none of which have a dedicated live category) fall back to a placeholder in the UI.",
     "protect-the-pride's dedicated category currently only lists African Lion live; Meerkat and Warthog for that same set appear under the special-edition catch-all category instead — a live-site categorization quirk, not a data-entry omission.",
     "New cards rotate monthly at the zoo, so this list (and the above caveats) may need revisiting over time.",
-    "Actual image display order at runtime: a live image found by live-sync.js at page load > cache/manifest.json tier=\"available\" (a real photo the weekly refresh-image-cache.yml Action found, downloaded, and committed under cache/images/ — including numbered photos still sitting in the WP media library but no longer attached as any post's current featured image) > this file's own image field (unchanged) > cache/manifest.json tier=\"fallback\" (a last-resort cached copy of whatever the live post has, used only for cards this file has no image for at all) > a generic placeholder icon. See scripts/refresh-image-cache.js and app.js's applyImageCache()."
+    "Actual image display order at runtime: a live image found by live-sync.js at page load > cache/manifest.json tier=\"available\" (a real photo the weekly refresh-image-cache.yml Action found, downloaded, and committed under cache/images/ — including numbered photos still sitting in the WP media library but no longer attached as any post's current featured image) > this file's own image field (unchanged) > cache/manifest.json tier=\"fallback\" (a last-resort cached copy of whatever the live post has, used only for cards this file has no image for at all) > a generic placeholder icon. See scripts/refresh-image-cache.js and app.js's applyImageCache().",
+    "Added \"California Condor\" to boo-at-the-zoo (2026-08) after a manually-found live photo (oaklandzoo.org/app/uploads/2026/05/6-Boo-California-Condor-Front-copy.webp) confirmed the set has at least 6 cards, not the 5 originally scraped. This also confirmed boo-at-the-zoo lives under the live \"special-edition\" category (same catch-all bucket as Main Entrance/Native Pollinators/Oakland Ballers) rather than having no live category at all — wp-card-utils.js updated accordingly. Worth spot-checking whether Oakland Roots & Soul and ZooCamp (still mapped to no live category) are similarly under-scraped."
   ],
   "sets": [
     {
@@ -549,6 +550,10 @@
         },
         {
           "name": "Caribbean Cave Cockroach"
+        },
+        {
+          "name": "California Condor",
+          "image": "https://www.oaklandzoo.org/app/uploads/2026/05/6-Boo-California-Condor-Front-copy.webp"
         }
       ]
     },

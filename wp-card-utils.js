@@ -29,7 +29,11 @@ export const NAME_RENAMES = {
 // always keep whatever data.json/the local cache already has.
 export const LIVE_CATEGORIES_FOR_SET = {
   standard: ["1-20", "21-40", "41-60", "61-80", "81-100"],
-  "boo-at-the-zoo": [],
+  // Confirmed live via a manually-found California Condor photo under this
+  // set (oaklandzoo.org/app/uploads/2026/05/6-Boo-California-Condor-Front-copy.webp)
+  // — same "special-edition" catch-all bucket as Main Entrance/Native
+  // Pollinators/Oakland Ballers below, just not sampled by the original scrape.
+  "boo-at-the-zoo": ["special-edition"],
   "city-of-oakland": ["city-of-oakland"],
   "coexist-with-wildlife": ["coexist-ca"],
   "main-entrance": ["special-edition"],

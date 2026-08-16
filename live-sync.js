@@ -9,7 +9,7 @@
 // The ?v= here needs bumping on wp-card-utils.js changes too — an import
 // specifier's own cache entry isn't tied to live-sync.js's script-tag
 // query param (see index.html's cache-busting comment).
-import { fetchAllTradingCards, parseCardPost, LIVE_CATEGORIES_FOR_SET } from "./wp-card-utils.js?v=1";
+import { fetchAllTradingCards, parseCardPost, LIVE_CATEGORIES_FOR_SET } from "./wp-card-utils.js?v=2";
 
 // Mutates OAKLAND_ZOO_CARD_SETS in place, preferring live values field by
 // field and falling back to whatever was already there. Returns true if

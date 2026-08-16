@@ -178,5 +178,10 @@
     "tier": "available",
     "file": "cache/images/standard--lamancha-goat.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/04/95-of-100-LaMancha-Goat.webp"
+  },
+  "boo-at-the-zoo::California Condor": {
+    "tier": "available",
+    "file": "https://www.oaklandzoo.org/app/uploads/2026/05/6-Boo-California-Condor-Front-copy.webp",
+    "manual": true
   }
 }
