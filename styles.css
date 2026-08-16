@@ -164,6 +164,13 @@ body {
   margin-left: 6px;
 }
 
+.progress-dup-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--oz-orange);
+  margin-left: 6px;
+}
+
 .progress-percent {
   font-size: 1.1rem;
   font-weight: 700;
@@ -412,6 +419,44 @@ body {
   flex-shrink: 0;
 }
 
+.qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding-left: 6px;
+  flex-shrink: 0;
+}
+
+.qty-btn {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--card-bg);
+  color: var(--oz-green-dark);
+  font-size: 0.9rem;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.qty-btn:hover {
+  background: var(--oz-sky);
+}
+
+.qty-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--oz-orange);
+  min-width: 18px;
+  text-align: center;
+}
+
 .card-item:hover {
   background: #f2f8f3;
 }
@@ -587,4 +632,24 @@ body {
   height: 18px;
   accent-color: var(--oz-green);
   cursor: pointer;
+}
+
+.modal-qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.modal-qty-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--oz-green-dark);
+  min-width: 16px;
+  text-align: center;
+}
+
+.modal-qty-label {
+  font-size: 0.85rem;
+  color: var(--muted);
 }
