@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oakland Zoo Card Checklist</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>" />
+<!--
+  Static/generic — link previews (texting/social) are fetched by the
+  messaging app's server, which never runs our JS, so there's no way to
+  swap in someone's actual personal progress image here without a backend
+  to render it per-request. This is the same for everyone; the real
+  personalized snapshot only ever travels as an attached file via the
+  Brag modal's "Share image…" button (see brag.js), never as a link
+  preview. Regenerate with the canvas drawing in scratch tooling if the
+  copy here ever changes — see brag.js for the drawing style to match.
+-->
+<meta property="og:title" content="Oakland Zoo Card Checklist" />
+<meta property="og:description" content="Track which Oakland Zoo trading cards you've got." />
+<meta property="og:image" content="https://gsbernstein.github.io/oakland-zoo-cards/og-image.png" />
+<meta property="og:url" content="https://gsbernstein.github.io/oakland-zoo-cards/" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="styles.css?v=7" />
 </head>
 <body>
@@ -153,7 +169,7 @@
             <input type="text" id="syncLinkInput" class="share-link-input" readonly />
             <button type="button" id="syncCopyBtn" class="btn btn-primary">Copy</button>
           </div>
-          <button type="button" id="syncNativeBtn" class="btn btn-ghost share-native-btn" hidden>Share…</button>
+          <button type="button" id="syncNativeBtn" class="btn btn-ghost share-native-btn">Share…</button>
         </section>
 
         <section class="share-section">
@@ -214,7 +230,7 @@
   <script type="module" src="app.js?v=10"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
-  <script type="module" src="sync.js?v=1"></script>
+  <script type="module" src="sync.js?v=2"></script>
   <script type="module" src="brag.js?v=1"></script>
 </body>
 </html>

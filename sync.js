@@ -305,7 +305,10 @@ async function openSyncModal() {
   syncDiffSummary.textContent = "";
   syncApplyStatus.textContent = "";
   syncLinkInput.value = buildShareUrl(hooks.getOwnedSnapshot());
-  syncNativeBtn.hidden = !navigator.share;
+  // Web Share API isn't available on most desktop browsers — fall back to
+  // an email compose link there instead of hiding the button, so there's
+  // always a one-click "send this" option next to Copy.
+  syncNativeBtn.textContent = navigator.share ? "Share…" : "Share via Email…";
   syncModalOverlay.hidden = false;
 }
 
@@ -342,15 +345,19 @@ syncCopyBtn.addEventListener("click", async () => {
 });
 
 syncNativeBtn.addEventListener("click", async () => {
-  try {
-    await navigator.share({
-      title: "Oakland Zoo Card Checklist",
-      text: "Here's my Oakland Zoo trading card collection — open this to compare with yours.",
-      url: syncLinkInput.value,
-    });
-  } catch (err) {
-    if (err && err.name !== "AbortError") console.warn("Link share failed:", err);
+  const url = syncLinkInput.value;
+  const text = "Here's my Oakland Zoo trading card collection — open this to compare with yours.";
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: "Oakland Zoo Card Checklist", text, url });
+    } catch (err) {
+      if (err && err.name !== "AbortError") console.warn("Link share failed:", err);
+    }
+    return;
   }
+  const subject = encodeURIComponent("My Oakland Zoo Card Checklist");
+  const body = encodeURIComponent(text + "\n\n" + url);
+  window.location.href = "mailto:?subject=" + subject + "&body=" + body;
 });
 
 // If this page was opened from someone else's share link, surface the diff
