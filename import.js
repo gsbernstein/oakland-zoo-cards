@@ -176,6 +176,36 @@ function diffSummaryText() {
   return text;
 }
 
+// Distinct from diffSummaryText(): this is what the top summary shows right
+// after Apply, so it reads as a confirmation of what just happened rather
+// than reverting to a plain "no differences" line that looks like nothing
+// occurred. `applied` is the count just written; the rest describes what,
+// if anything, is left to review.
+function appliedSummaryText(applied) {
+  const actionable = currentDiffRows.filter((r) => !r.notFound);
+  const notFound = currentDiffRows.filter((r) => r.notFound);
+  let text;
+  if (!applied) {
+    text = "No changes selected — nothing applied.";
+  } else {
+    text = "Applied " + applied + " change" + (applied === 1 ? "" : "s") + ".";
+    if (actionable.length) {
+      text +=
+        " " +
+        actionable.length +
+        " difference" +
+        (actionable.length === 1 ? " remains" : "s remain") +
+        " — pick which to bring in.";
+    } else {
+      text += " Your collections now match.";
+    }
+  }
+  if (notFound.length) {
+    text += " (" + notFound.length + " card" + (notFound.length === 1 ? "" : "s") + " not found — see below.)";
+  }
+  return text;
+}
+
 importDiffKeepAllBtn.addEventListener("click", () => {
   currentDiffRows.forEach((r) => {
     if (!r.notFound) r.choice = "mine";
@@ -206,7 +236,7 @@ importApplyBtn.addEventListener("click", () => {
   importApplyStatus.textContent = applied
     ? "Applied " + applied + " change" + (applied === 1 ? "" : "s") + "."
     : "No changes selected — nothing applied.";
-  importDiffSummary.textContent = diffSummaryText();
+  importDiffSummary.textContent = appliedSummaryText(applied);
 });
 
 function closeImportModal() {
