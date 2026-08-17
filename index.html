@@ -28,7 +28,7 @@
 <meta property="og:description" content="Track which Oakland Zoo trading cards you've got." />
 <meta property="og:url" content="https://gsbernstein.github.io/oakland-zoo-cards/" />
 <meta property="og:type" content="website" />
-<link rel="stylesheet" href="styles.css?v=11" />
+<link rel="stylesheet" href="styles.css?v=12" />
 </head>
 <body>
   <header class="site-header">
@@ -81,12 +81,12 @@
         <option value="available">Available at Zoo</option>
         <option value="unavailable">Currently Unavailable</option>
       </select>
-      <div class="toggle-group" role="group" aria-label="Show which cards">
-        <button class="toggle-btn active" data-filter="all">All</button>
-        <button class="toggle-btn" data-filter="owned">Owned</button>
-        <button class="toggle-btn" data-filter="missing">Missing</button>
-        <button class="toggle-btn" data-filter="duplicates">Duplicates</button>
-      </div>
+      <select id="statusFilter" class="set-filter" aria-label="Show which cards">
+        <option value="all">All</option>
+        <option value="owned">Owned</option>
+        <option value="missing">Missing</option>
+        <option value="duplicates">Duplicates</option>
+      </select>
     </section>
 
     <div id="setsContainer" class="sets-container"></div>
@@ -237,7 +237,7 @@
     wp-card-utils.js. Same for scan.js and its card-matcher.js import, and
     for sync.js/brag.js and their shared snapshot-image.js import.
   -->
-  <script type="module" src="app.js?v=13"></script>
+  <script type="module" src="app.js?v=14"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
   <script type="module" src="sync.js?v=10"></script>

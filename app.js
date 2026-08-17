@@ -8,7 +8,7 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
   const searchInput = document.getElementById("searchInput");
   const setFilter = document.getElementById("setFilter");
   const availabilityFilter = document.getElementById("availabilityFilter");
-  const toggleButtons = document.querySelectorAll(".toggle-btn");
+  const statusFilterSelect = document.getElementById("statusFilter");
   const resetBtn = document.getElementById("resetBtn");
   const emptyState = document.getElementById("emptyState");
   const ownedCountEl = document.getElementById("ownedCount");
@@ -517,13 +517,9 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
     applyFilters();
   });
 
-  toggleButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      toggleButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      statusFilter = btn.dataset.filter;
-      applyFilters();
-    });
+  statusFilterSelect.addEventListener("change", (e) => {
+    statusFilter = e.target.value;
+    applyFilters();
   });
 
   resetBtn.addEventListener("click", () => {

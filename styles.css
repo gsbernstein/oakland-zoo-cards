@@ -238,78 +238,46 @@ body {
   background: var(--oz-orange);
 }
 
+/* Four equal chips in one row — search plus three <select>s. Each starts
+   at an equal, compact share of the row; the one being interacted with
+   grows (via flex-grow) at the others' expense rather than the row
+   wrapping to a second line. A <select>'s own "expand" is just its
+   native dropdown opening — no custom popover needed. */
 .controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
+  gap: 8px;
   margin-bottom: 22px;
 }
 
-.search-input {
-  flex: 1 1 130px;
-  min-width: 0;
-  max-width: 170px;
+.search-input,
+.set-filter {
+  flex: 1 1 0;
+  min-width: 64px;
   padding: 9px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  font-size: 0.9rem;
   background: var(--card-bg);
-  box-shadow: var(--shadow);
+  font-size: 0.82rem;
   outline: none;
-  transition: max-width 0.2s ease, flex-grow 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: flex-grow 0.2s ease;
+}
+
+.search-input {
+  box-shadow: var(--shadow);
 }
 
 .search-input:focus {
   border-color: var(--oz-green);
-  flex-grow: 4;
-  max-width: 420px;
-}
-
-.set-filter {
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--card-bg);
-  font-size: 0.82rem;
-  flex: 1 1 110px;
-  min-width: 0;
-  max-width: 150px;
-  transition: max-width 0.2s ease, flex-grow 0.2s ease;
+  flex-grow: 3;
 }
 
 .set-filter:hover,
 .set-filter:focus {
-  flex-grow: 3;
-  max-width: 260px;
-}
-
-.toggle-group {
-  display: flex;
-  flex-shrink: 0;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.toggle-btn {
-  border: none;
-  background: transparent;
-  padding: 8px 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.toggle-btn + .toggle-btn {
-  border-left: 1px solid var(--border);
-}
-
-.toggle-btn.active {
-  background: var(--oz-green);
-  color: white;
+  flex-grow: 2;
 }
 
 .sets-container {
