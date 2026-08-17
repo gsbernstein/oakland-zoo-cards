@@ -64,49 +64,49 @@ export function renderSnapshotCanvas() {
   ctx.globalAlpha = 0.08;
   ctx.fillStyle = "#e9dfc9";
   ctx.beginPath();
-  ctx.arc(990, 130, 230, 0, Math.PI * 2);
+  ctx.arc(1010, 120, 260, 0, Math.PI * 2);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(180, 780, 200, 0, Math.PI * 2);
+  ctx.arc(160, 800, 230, 0, Math.PI * 2);
   ctx.fill();
   ctx.globalAlpha = 1;
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "88px sans-serif";
-  ctx.fillText("🦁", midX, 170);
+  ctx.font = "120px sans-serif";
+  ctx.fillText("🦁", midX, 175);
 
-  ctx.font = "700 46px sans-serif";
-  ctx.fillText("Oakland Zoo", midX, 250);
-  ctx.fillText("Card Checklist", midX, 305);
+  ctx.font = "700 60px sans-serif";
+  ctx.fillText("Oakland Zoo", midX, 260);
+  ctx.fillText("Card Checklist", midX, 325);
 
-  ctx.font = "700 120px sans-serif";
-  ctx.fillText(ownedTotal + "/" + total, midX, 485);
+  ctx.font = "700 165px sans-serif";
+  ctx.fillText(ownedTotal + "/" + total, midX, 520);
 
   ctx.fillStyle = "#e0812a";
-  ctx.font = "600 38px sans-serif";
-  ctx.fillText("cards collected", midX, 535);
+  ctx.font = "600 50px sans-serif";
+  ctx.fillText("cards collected", midX, 590);
 
-  const barW = 900;
-  const barH = 28;
+  const barW = 1000;
+  const barH = 40;
   const barX = midX - barW / 2;
-  const barY = 595;
+  const barY = 665;
   ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
-  roundRect(ctx, barX, barY, barW, barH, 14);
+  roundRect(ctx, barX, barY, barW, barH, 20);
   ctx.fill();
   ctx.fillStyle = "#e0812a";
-  roundRect(ctx, barX, barY, Math.max(barH, (barW * pct) / 100), barH, 14);
+  roundRect(ctx, barX, barY, Math.max(barH, (barW * pct) / 100), barH, 20);
   ctx.fill();
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "600 30px sans-serif";
-  ctx.fillText(pct + "%", midX, barY - 15);
+  ctx.font = "600 40px sans-serif";
+  ctx.fillText(pct + "%", midX, barY - 18);
 
   // Baked into the image itself (not just a share sheet's url field) so
   // the invite survives even a plain re-shared/downloaded copy.
   const siteUrl = buildSiteUrl();
-  ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-  ctx.font = "italic 25px sans-serif";
-  ctx.fillText("Make your own: " + siteUrl.host + siteUrl.pathname, midX, 845);
+  ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+  ctx.font = "italic 32px sans-serif";
+  ctx.fillText("Make your own: " + siteUrl.host + siteUrl.pathname, midX, 855);
 
   return { canvas, ownedTotal, total, siteUrl };
 }

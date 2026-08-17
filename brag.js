@@ -3,7 +3,7 @@
 // link, which carries your actual card counts. This one carries none of
 // that; the link here always points at the bare site with no query string,
 // so it's safe to post anywhere.
-import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=3";
+import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=4";
 
 const bragBtn = document.getElementById("bragBtn");
 const bragModalOverlay = document.getElementById("bragModalOverlay");
