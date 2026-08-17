@@ -6,14 +6,25 @@
 <title>Oakland Zoo Card Checklist</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>" />
 <!--
+  A real PNG favicon alongside the inline SVG one above — some link-
+  preview crawlers (Slack/Discord/etc., when falling back to a small
+  logo instead of a full og:image) don't reliably parse an inline
+  data-uri SVG icon, so this gives them something ordinary to find.
+-->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#1f6b3a" />
+<!--
   Deliberately no og:image/twitter:card here. Sync's and Brag's "Copy"
   buttons attach a real, personalized snapshot image straight to the
   clipboard (see snapshot-image.js) — a static generic og:image would just
   be a second, differently-styled image competing with that in whatever
-  gets pasted. Title/description/url stay so a plain (image-less) text
-  preview still shows up for a bare link shared some other way.
+  gets pasted. Title/description/url/site_name stay so a plain (image-
+  less) text-plus-favicon preview still shows up for a bare link shared
+  some other way (exact appearance is up to each platform).
 -->
 <meta property="og:title" content="Oakland Zoo Card Checklist" />
+<meta property="og:site_name" content="Oakland Zoo Card Checklist" />
 <meta property="og:description" content="Track which Oakland Zoo trading cards you've got." />
 <meta property="og:url" content="https://gsbernstein.github.io/oakland-zoo-cards/" />
 <meta property="og:type" content="website" />
@@ -233,8 +244,8 @@
   <script type="module" src="app.js?v=10"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
-  <script type="module" src="sync.js?v=6"></script>
+  <script type="module" src="sync.js?v=7"></script>
   <script type="module" src="import.js?v=2"></script>
-  <script type="module" src="brag.js?v=3"></script>
+  <script type="module" src="brag.js?v=4"></script>
 </body>
 </html>
