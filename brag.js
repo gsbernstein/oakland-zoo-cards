@@ -3,7 +3,7 @@
 // link, which carries your actual card counts. This one carries none of
 // that; the link here always points at the bare site with no query string,
 // so it's safe to post anywhere.
-import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=4";
+import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=5";
 
 const bragBtn = document.getElementById("bragBtn");
 const bragModalOverlay = document.getElementById("bragModalOverlay");
@@ -27,8 +27,8 @@ function waitForCardData() {
   });
 }
 
-function updateBragImagePreview() {
-  const { canvas } = renderSnapshotCanvas();
+async function updateBragImagePreview() {
+  const { canvas } = await renderSnapshotCanvas();
   canvas.toBlob((blob) => {
     if (!blob) return;
     if (bragImageBlobUrl) URL.revokeObjectURL(bragImageBlobUrl);
@@ -39,7 +39,7 @@ function updateBragImagePreview() {
 }
 
 bragCopyBtn.addEventListener("click", async () => {
-  const { canvas, siteUrl } = renderSnapshotCanvas();
+  const { canvas, siteUrl } = await renderSnapshotCanvas();
   const url = siteUrl.toString();
   const rich = await copyImageAndText(canvas, url);
   let copied = rich;
@@ -57,7 +57,7 @@ bragCopyBtn.addEventListener("click", async () => {
 });
 
 bragImageShareBtn.addEventListener("click", async () => {
-  const { canvas, ownedTotal, total, siteUrl } = renderSnapshotCanvas();
+  const { canvas, ownedTotal, total, siteUrl } = await renderSnapshotCanvas();
   canvas.toBlob(async (blob) => {
     if (!blob) return;
     try {

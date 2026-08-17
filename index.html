@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oakland Zoo Card Checklist</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>" />
 <!--
-  A real PNG favicon alongside the inline SVG one above — some link-
-  preview crawlers (Slack/Discord/etc., when falling back to a small
-  logo instead of a full og:image) don't reliably parse an inline
-  data-uri SVG icon, so this gives them something ordinary to find.
+  A real PNG favicon rather than an inline emoji-based SVG data URI —
+  more consistent across platforms than relying on each OS's own emoji
+  font, and some link-preview crawlers (Slack/Discord/etc., when falling
+  back to a small logo instead of a full og:image) don't reliably parse
+  an inline data-uri SVG icon anyway.
 -->
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -28,13 +28,13 @@
 <meta property="og:description" content="Track which Oakland Zoo trading cards you've got." />
 <meta property="og:url" content="https://gsbernstein.github.io/oakland-zoo-cards/" />
 <meta property="og:type" content="website" />
-<link rel="stylesheet" href="styles.css?v=8" />
+<link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
-        <span class="brand-emoji" aria-hidden="true">🦁</span>
+        <img src="apple-touch-icon.png" class="brand-icon" alt="" aria-hidden="true" />
         <div>
           <h1>Oakland Zoo Card Checklist</h1>
           <p class="subtitle">Track your Oakland Zoo trading card collection</p>
@@ -234,11 +234,11 @@
     wp-card-utils.js. Same for scan.js and its card-matcher.js import, and
     for sync.js/brag.js and their shared snapshot-image.js import.
   -->
-  <script type="module" src="app.js?v=10"></script>
+  <script type="module" src="app.js?v=11"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
-  <script type="module" src="sync.js?v=9"></script>
+  <script type="module" src="sync.js?v=10"></script>
   <script type="module" src="import.js?v=2"></script>
-  <script type="module" src="brag.js?v=7"></script>
+  <script type="module" src="brag.js?v=8"></script>
 </body>
 </html>

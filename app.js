@@ -117,6 +117,16 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
     return setId + "::" + cardName;
   }
 
+  // Only for the transition that actually drops a card out of the
+  // collection (owned -> not owned), not for reducing a duplicate count
+  // while still owned (e.g. 3 -> 2) — that's just an adjustment, not a
+  // removal. Left out of setCount() itself since that's also the path
+  // sync.js's bulk "Apply selected" uses, which already goes through its
+  // own deliberate review UI and shouldn't pop a confirm() per card.
+  function confirmCardRemoval(cardName) {
+    return confirm('Remove "' + cardName + '" from your collection?');
+  }
+
   const PAW_PLACEHOLDER =
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e9dfc9'/%3E%3Ctext x='50' y='62' font-size='44' text-anchor='middle'%3E%F0%9F%90%BE%3C/text%3E%3C/svg%3E";
 
@@ -202,12 +212,21 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
   modalOwnedCheckbox.addEventListener("change", () => {
     if (!modalContext) return;
     const { setId, item, checkbox, key } = modalContext;
-    setCount(setId, item, checkbox, key, modalOwnedCheckbox.checked ? Math.max(1, getCount(key)) : 0);
+    const current = getCount(key);
+    if (!modalOwnedCheckbox.checked && current > 0) {
+      if (!confirmCardRemoval(modalCardName.textContent)) {
+        modalOwnedCheckbox.checked = true;
+        return;
+      }
+    }
+    setCount(setId, item, checkbox, key, modalOwnedCheckbox.checked ? Math.max(1, current) : 0);
   });
   modalQtyDec.addEventListener("click", () => {
     if (!modalContext) return;
     const { setId, item, checkbox, key } = modalContext;
-    setCount(setId, item, checkbox, key, getCount(key) - 1);
+    const current = getCount(key);
+    if (current === 1 && !confirmCardRemoval(modalCardName.textContent)) return;
+    setCount(setId, item, checkbox, key, current - 1);
   });
   modalQtyInc.addEventListener("click", () => {
     if (!modalContext) return;
@@ -270,7 +289,14 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
         item.dataset.qty = String(initialCount);
 
         checkbox.addEventListener("change", () => {
-          setCount(set.id, item, checkbox, key, checkbox.checked ? Math.max(1, getCount(key)) : 0);
+          const current = getCount(key);
+          if (!checkbox.checked && current > 0) {
+            if (!confirmCardRemoval(card.name)) {
+              checkbox.checked = true;
+              return;
+            }
+          }
+          setCount(set.id, item, checkbox, key, checkbox.checked ? Math.max(1, current) : 0);
         });
 
         const thumbWrap = document.createElement("span");
@@ -337,7 +363,9 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
         decBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          setCount(set.id, item, checkbox, key, getCount(key) - 1);
+          const current = getCount(key);
+          if (current === 1 && !confirmCardRemoval(card.name)) return;
+          setCount(set.id, item, checkbox, key, current - 1);
         });
 
         const qtyBadge = document.createElement("span");

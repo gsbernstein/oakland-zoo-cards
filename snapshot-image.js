@@ -33,7 +33,23 @@ export function buildSiteUrl() {
   return url;
 }
 
-export function renderSnapshotCanvas() {
+// Same logo file used for the favicon/apple-touch-icon and the header —
+// loaded once and cached, rather than relying on the 🦁 emoji glyph
+// (whose actual appearance varies by OS/browser emoji font).
+let logoImagePromise = null;
+function loadLogoImage() {
+  if (!logoImagePromise) {
+    logoImagePromise = new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = "apple-touch-icon.png";
+    });
+  }
+  return logoImagePromise;
+}
+
+export async function renderSnapshotCanvas() {
   const sets = window.OAKLAND_ZOO_CARD_SETS || [];
   const owned = window.__oaklandZooChecklist.getOwnedSnapshot();
   let total = 0;
@@ -45,6 +61,7 @@ export function renderSnapshotCanvas() {
     });
   });
   const pct = total ? Math.round((ownedTotal / total) * 100) : 0;
+  const logo = await loadLogoImage();
 
   const WIDTH = 1200;
   const HEIGHT = 900;
@@ -71,10 +88,16 @@ export function renderSnapshotCanvas() {
   ctx.fill();
   ctx.globalAlpha = 1;
 
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "120px sans-serif";
-  ctx.fillText("🦁", midX, 175);
+  const logoSize = 150;
+  const logoX = midX - logoSize / 2;
+  const logoY = 35;
+  ctx.save();
+  roundRect(ctx, logoX, logoY, logoSize, logoSize, 28);
+  ctx.clip();
+  ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
+  ctx.restore();
 
+  ctx.fillStyle = "#ffffff";
   ctx.font = "700 60px sans-serif";
   ctx.fillText("Oakland Zoo", midX, 260);
   ctx.fillText("Card Checklist", midX, 325);

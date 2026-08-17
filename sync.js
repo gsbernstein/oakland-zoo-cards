@@ -2,7 +2,7 @@
 // receiving side (import.js) is a dedicated modal, not a section tacked
 // onto this one — this file only builds/copies/sends the link, plus a
 // thin entry point that hands a pasted link/code off to import.js.
-import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=4";
+import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=5";
 
 const syncBtn = document.getElementById("syncBtn");
 const syncModalOverlay = document.getElementById("syncModalOverlay");
@@ -104,7 +104,7 @@ syncCopyBtn.addEventListener("click", async () => {
   // per-card specifics) so pasting into an image-aware app (Notes, Mail,
   // Slack) carries a visual alongside the link — the exact per-card counts
   // that make this link actually sync-able still travel only in the text.
-  const { canvas } = renderSnapshotCanvas();
+  const { canvas } = await renderSnapshotCanvas();
   let copied = await copyImageAndText(canvas, text);
   if (!copied) {
     try {
