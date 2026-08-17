@@ -11,7 +11,6 @@ const bragCloseBtn = document.getElementById("bragCloseBtn");
 const bragImagePreview = document.getElementById("bragImagePreview");
 const bragCopyBtn = document.getElementById("bragCopyBtn");
 const bragImageShareBtn = document.getElementById("bragImageShareBtn");
-const bragSiteLink = document.getElementById("bragSiteLink");
 
 let bragImageBlobUrl = null;
 
@@ -29,9 +28,7 @@ function waitForCardData() {
 }
 
 function updateBragImagePreview() {
-  const { canvas, siteUrl } = renderSnapshotCanvas();
-  bragSiteLink.href = siteUrl.toString();
-  bragSiteLink.textContent = siteUrl.host + siteUrl.pathname;
+  const { canvas } = renderSnapshotCanvas();
   canvas.toBlob((blob) => {
     if (!blob) return;
     if (bragImageBlobUrl) URL.revokeObjectURL(bragImageBlobUrl);
