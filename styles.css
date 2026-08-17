@@ -34,44 +34,37 @@ body {
 .header-inner {
   max-width: 960px;
   margin: 0 auto;
-  padding: 22px 20px;
+  padding: 12px 20px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.brand {
+.brand-row {
   display: flex;
   align-items: center;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: block;
   flex-shrink: 0;
 }
 
-.brand h1 {
+.brand-row h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   letter-spacing: 0.2px;
-}
-
-.subtitle {
-  margin: 2px 0 0;
-  font-size: 0.9rem;
-  opacity: 0.85;
 }
 
 .data-source-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  margin-top: 8px;
   padding: 3px 10px;
   border-radius: 999px;
   font-size: 0.7rem;
@@ -131,16 +124,24 @@ body {
 }
 
 /* .btn-ghost's white-on-translucent-white styling only reads correctly on
-   the dark green header it was designed for — inside a modal's white
-   .share-body it was previously near-invisible (white text on near-white). */
-.share-body .btn-ghost {
+   the dark green header it was designed for — on a white background (a
+   modal's .share-body, or the page-bottom .reset-section) it was
+   previously near-invisible (white text on near-white). */
+.share-body .btn-ghost,
+.reset-section .btn-ghost {
   background: var(--oz-sky);
   color: var(--oz-green-dark);
   border: 1px solid var(--border);
 }
 
-.share-body .btn-ghost:hover {
+.share-body .btn-ghost:hover,
+.reset-section .btn-ghost:hover {
   background: var(--border);
+}
+
+.reset-section {
+  text-align: center;
+  margin-top: 28px;
 }
 
 .btn-primary {
@@ -158,9 +159,9 @@ body {
 
 .header-actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .container {
@@ -173,8 +174,8 @@ body {
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 20px 22px;
-  margin-bottom: 20px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
   border: 1px solid var(--border);
 }
 
@@ -182,33 +183,33 @@ body {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   flex-wrap: wrap;
   gap: 6px;
 }
 
 .progress-count {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--oz-green-dark);
 }
 
 .progress-label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--muted);
   margin-left: 6px;
 }
 
 .progress-dup-count {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--oz-orange);
   margin-left: 6px;
 }
 
 .progress-percent {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--oz-orange);
 }
@@ -239,45 +240,53 @@ body {
 
 .controls {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
   margin-bottom: 22px;
 }
 
 .search-input {
-  width: 100%;
-  padding: 12px 16px;
+  flex: 1 1 130px;
+  min-width: 0;
+  max-width: 170px;
+  padding: 9px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  font-size: 1rem;
+  font-size: 0.9rem;
   background: var(--card-bg);
   box-shadow: var(--shadow);
   outline: none;
+  transition: max-width 0.2s ease, flex-grow 0.2s ease;
 }
 
 .search-input:focus {
   border-color: var(--oz-green);
-}
-
-.filter-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-grow: 4;
+  max-width: 420px;
 }
 
 .set-filter {
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--card-bg);
-  font-size: 0.9rem;
-  flex: 1;
-  min-width: 180px;
+  font-size: 0.82rem;
+  flex: 1 1 110px;
+  min-width: 0;
+  max-width: 150px;
+  transition: max-width 0.2s ease, flex-grow 0.2s ease;
+}
+
+.set-filter:hover,
+.set-filter:focus {
+  flex-grow: 3;
+  max-width: 260px;
 }
 
 .toggle-group {
   display: flex;
+  flex-shrink: 0;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -287,8 +296,8 @@ body {
 .toggle-btn {
   border: none;
   background: transparent;
-  padding: 10px 16px;
-  font-size: 0.85rem;
+  padding: 8px 12px;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--muted);
   cursor: pointer;
@@ -559,12 +568,12 @@ body {
 }
 
 @media (max-width: 520px) {
-  .brand h1 {
-    font-size: 1.2rem;
+  .brand-row h1 {
+    font-size: 1rem;
   }
   .brand-icon {
-    width: 34px;
-    height: 34px;
+    width: 26px;
+    height: 26px;
   }
   .set-progress-text {
     display: none;

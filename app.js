@@ -446,8 +446,7 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
     progressBarFillSolo.style.width = (total === 0 ? 0 : (soloOwnedTotal / total) * 100) + "%";
     progressBarFillDup.style.width = (total === 0 ? 0 : (dupTotal / total) * 100) + "%";
     dupCountEl.hidden = dupTotal === 0;
-    dupCountEl.textContent =
-      dupTotal === 0 ? "" : `• ${dupTotal} card${dupTotal === 1 ? "" : "s"} ${dupTotal === 1 ? "has" : "have"} duplicates`;
+    dupCountEl.textContent = dupTotal === 0 ? "" : `• ${dupTotal} with dupes`;
   }
 
   function applyFilters() {

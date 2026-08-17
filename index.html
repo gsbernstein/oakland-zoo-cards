@@ -28,27 +28,23 @@
 <meta property="og:description" content="Track which Oakland Zoo trading cards you've got." />
 <meta property="og:url" content="https://gsbernstein.github.io/oakland-zoo-cards/" />
 <meta property="og:type" content="website" />
-<link rel="stylesheet" href="styles.css?v=10" />
+<link rel="stylesheet" href="styles.css?v=11" />
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <div class="brand">
+      <div class="brand-row">
         <img src="apple-touch-icon.png" class="brand-icon" alt="" aria-hidden="true" />
-        <div>
-          <h1>Oakland Zoo Card Checklist</h1>
-          <p class="subtitle">Track your Oakland Zoo trading card collection</p>
-          <span id="dataSourceBadge" class="data-source-badge" title="">
-            <span class="data-source-dot" aria-hidden="true"></span>
-            <span class="data-source-label">Loading…</span>
-          </span>
-        </div>
+        <h1>Oakland Zoo Card Checklist</h1>
+        <span id="dataSourceBadge" class="data-source-badge" title="">
+          <span class="data-source-dot" aria-hidden="true"></span>
+          <span class="data-source-label">Loading…</span>
+        </span>
       </div>
       <div class="header-actions">
         <button id="scanBtn" class="btn btn-ghost" title="Scan a card with your camera">📷 Scan a Card</button>
         <button id="syncBtn" class="btn btn-ghost" title="Send your collection or bring in someone else's">🔗 Sync</button>
         <button id="bragBtn" class="btn btn-ghost" title="Share a progress snapshot">🏆 Brag</button>
-        <button id="resetBtn" class="btn btn-ghost" title="Clear all checked cards">Reset All</button>
       </div>
     </div>
   </header>
@@ -58,7 +54,7 @@
       <div class="progress-summary">
         <div class="progress-count">
           <span id="ownedCount">0</span> / <span id="totalCount">0</span>
-          <span class="progress-label">cards collected</span>
+          <span class="progress-label">collected</span>
           <span id="dupCount" class="progress-dup-count" hidden></span>
         </div>
         <div class="progress-percent" id="progressPercent">0%</div>
@@ -77,21 +73,19 @@
         placeholder="Search cards by name..."
         autocomplete="off"
       />
-      <div class="filter-row">
-        <select id="setFilter" class="set-filter">
-          <option value="all">All Sets</option>
-        </select>
-        <select id="availabilityFilter" class="set-filter">
-          <option value="all">Available + Unavailable</option>
-          <option value="available">Available at Zoo</option>
-          <option value="unavailable">Currently Unavailable</option>
-        </select>
-        <div class="toggle-group" role="group" aria-label="Show which cards">
-          <button class="toggle-btn active" data-filter="all">All</button>
-          <button class="toggle-btn" data-filter="owned">Owned</button>
-          <button class="toggle-btn" data-filter="missing">Missing</button>
-          <button class="toggle-btn" data-filter="duplicates">Duplicates</button>
-        </div>
+      <select id="setFilter" class="set-filter">
+        <option value="all">All Sets</option>
+      </select>
+      <select id="availabilityFilter" class="set-filter">
+        <option value="all">Available + Unavailable</option>
+        <option value="available">Available at Zoo</option>
+        <option value="unavailable">Currently Unavailable</option>
+      </select>
+      <div class="toggle-group" role="group" aria-label="Show which cards">
+        <button class="toggle-btn active" data-filter="all">All</button>
+        <button class="toggle-btn" data-filter="owned">Owned</button>
+        <button class="toggle-btn" data-filter="missing">Missing</button>
+        <button class="toggle-btn" data-filter="duplicates">Duplicates</button>
       </div>
     </section>
 
@@ -112,6 +106,9 @@
       refreshed weekly — see <code>cache/manifest.json</code>.
     </p>
     <p id="syncStatus" class="storage-note sync-status"></p>
+    <div class="reset-section">
+      <button id="resetBtn" class="btn btn-ghost" title="Clear all checked cards">Reset All</button>
+    </div>
   </footer>
 
   <div id="cardModalOverlay" class="modal-overlay" hidden>
@@ -240,7 +237,7 @@
     wp-card-utils.js. Same for scan.js and its card-matcher.js import, and
     for sync.js/brag.js and their shared snapshot-image.js import.
   -->
-  <script type="module" src="app.js?v=12"></script>
+  <script type="module" src="app.js?v=13"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
   <script type="module" src="sync.js?v=10"></script>
