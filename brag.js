@@ -9,7 +9,6 @@ const bragBtn = document.getElementById("bragBtn");
 const bragModalOverlay = document.getElementById("bragModalOverlay");
 const bragCloseBtn = document.getElementById("bragCloseBtn");
 const bragImagePreview = document.getElementById("bragImagePreview");
-const bragImageDownloadBtn = document.getElementById("bragImageDownloadBtn");
 const bragCopyBtn = document.getElementById("bragCopyBtn");
 const bragImageShareBtn = document.getElementById("bragImageShareBtn");
 const bragSiteLink = document.getElementById("bragSiteLink");
@@ -30,7 +29,7 @@ function waitForCardData() {
 }
 
 function updateBragImagePreview() {
-  const { canvas, ownedTotal, total, siteUrl } = renderSnapshotCanvas();
+  const { canvas, siteUrl } = renderSnapshotCanvas();
   bragSiteLink.href = siteUrl.toString();
   bragSiteLink.textContent = siteUrl.host + siteUrl.pathname;
   canvas.toBlob((blob) => {
@@ -38,8 +37,6 @@ function updateBragImagePreview() {
     if (bragImageBlobUrl) URL.revokeObjectURL(bragImageBlobUrl);
     bragImageBlobUrl = URL.createObjectURL(blob);
     bragImagePreview.src = bragImageBlobUrl;
-    bragImageDownloadBtn.href = bragImageBlobUrl;
-    bragImageDownloadBtn.download = "oakland-zoo-cards-" + ownedTotal + "-of-" + total + ".png";
     bragImageShareBtn.hidden = !(navigator.share && navigator.canShare);
   }, "image/png");
 }
@@ -76,8 +73,8 @@ bragImageShareBtn.addEventListener("click", async () => {
         url: siteUrl.toString(),
       });
     } catch (err) {
-      // User cancelled, or sharing files isn't actually supported — the
-      // Download button next to it is always a working fallback.
+      // User cancelled, or sharing files isn't actually supported — Copy
+      // next to it is always a working fallback.
       if (err && err.name !== "AbortError") console.warn("Image share failed:", err);
     }
   }, "image/png");
