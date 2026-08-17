@@ -28,7 +28,7 @@
 <meta property="og:description" content="Track which Oakland Zoo trading cards you've got." />
 <meta property="og:url" content="https://gsbernstein.github.io/oakland-zoo-cards/" />
 <meta property="og:type" content="website" />
-<link rel="stylesheet" href="styles.css?v=9" />
+<link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
   <header class="site-header">
@@ -64,7 +64,8 @@
         <div class="progress-percent" id="progressPercent">0%</div>
       </div>
       <div class="progress-bar-track">
-        <div class="progress-bar-fill" id="progressBarFill"></div>
+        <div class="progress-bar-fill progress-bar-fill-solo" id="progressBarFillSolo"></div>
+        <div class="progress-bar-fill progress-bar-fill-dup" id="progressBarFillDup"></div>
       </div>
     </section>
 
@@ -79,6 +80,11 @@
       <div class="filter-row">
         <select id="setFilter" class="set-filter">
           <option value="all">All Sets</option>
+        </select>
+        <select id="availabilityFilter" class="set-filter">
+          <option value="all">Available + Unavailable</option>
+          <option value="available">Available at Zoo</option>
+          <option value="unavailable">Currently Unavailable</option>
         </select>
         <div class="toggle-group" role="group" aria-label="Show which cards">
           <button class="toggle-btn active" data-filter="all">All</button>
@@ -234,7 +240,7 @@
     wp-card-utils.js. Same for scan.js and its card-matcher.js import, and
     for sync.js/brag.js and their shared snapshot-image.js import.
   -->
-  <script type="module" src="app.js?v=11"></script>
+  <script type="module" src="app.js?v=12"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
   <script type="module" src="sync.js?v=10"></script>

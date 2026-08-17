@@ -214,6 +214,7 @@ body {
 }
 
 .progress-bar-track {
+  display: flex;
   width: 100%;
   height: 12px;
   background: var(--oz-tan);
@@ -224,9 +225,16 @@ body {
 .progress-bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--oz-green) 0%, var(--oz-orange) 100%);
-  border-radius: 999px;
+  flex-shrink: 0;
   transition: width 0.3s ease;
+}
+
+.progress-bar-fill-solo {
+  background: var(--oz-green);
+}
+
+.progress-bar-fill-dup {
+  background: var(--oz-orange);
 }
 
 .controls {

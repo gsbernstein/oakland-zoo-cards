@@ -7,6 +7,7 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
   const setsContainer = document.getElementById("setsContainer");
   const searchInput = document.getElementById("searchInput");
   const setFilter = document.getElementById("setFilter");
+  const availabilityFilter = document.getElementById("availabilityFilter");
   const toggleButtons = document.querySelectorAll(".toggle-btn");
   const resetBtn = document.getElementById("resetBtn");
   const emptyState = document.getElementById("emptyState");
@@ -14,7 +15,8 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
   const totalCountEl = document.getElementById("totalCount");
   const dupCountEl = document.getElementById("dupCount");
   const progressPercentEl = document.getElementById("progressPercent");
-  const progressBarFill = document.getElementById("progressBarFill");
+  const progressBarFillSolo = document.getElementById("progressBarFillSolo");
+  const progressBarFillDup = document.getElementById("progressBarFillDup");
   const syncStatusEl = document.getElementById("syncStatus");
   const dataSourceBadge = document.getElementById("dataSourceBadge");
   const dataSourceLabel = dataSourceBadge.querySelector(".data-source-label");
@@ -36,6 +38,7 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
   let collapsed = loadCollapsed();
   let searchTerm = "";
   let setFilterValue = "all";
+  let availabilityFilterValue = "all";
   let statusFilter = "all";
 
   // owned[key] is a quantity (integer >= 1); absent/0 means "don't have it".
@@ -280,6 +283,7 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
         const item = document.createElement("label");
         item.className = "card-item";
         item.dataset.cardName = card.name.toLowerCase();
+        item.dataset.unavailable = isUnavailable(card) ? "true" : "false";
 
         const initialCount = getCount(key);
         const checkbox = document.createElement("input");
@@ -430,13 +434,20 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
         if (count > 1) dupTotal++;
       });
     });
+    const soloOwnedTotal = ownedTotal - dupTotal;
     const pct = total === 0 ? 0 : Math.round((ownedTotal / total) * 100);
     ownedCountEl.textContent = ownedTotal;
     totalCountEl.textContent = total;
     progressPercentEl.textContent = pct + "%";
-    progressBarFill.style.width = pct + "%";
+    // Two solid segments instead of one gradient — green is cards owned
+    // with no duplicates, orange is cards owned with two or more, so the
+    // color split actually reflects real duplicate data rather than just
+    // being a decorative fade across the whole bar.
+    progressBarFillSolo.style.width = (total === 0 ? 0 : (soloOwnedTotal / total) * 100) + "%";
+    progressBarFillDup.style.width = (total === 0 ? 0 : (dupTotal / total) * 100) + "%";
     dupCountEl.hidden = dupTotal === 0;
-    dupCountEl.textContent = dupTotal === 0 ? "" : `• ${dupTotal} duplicate${dupTotal === 1 ? "" : "s"}`;
+    dupCountEl.textContent =
+      dupTotal === 0 ? "" : `• ${dupTotal} card${dupTotal === 1 ? "" : "s"} ${dupTotal === 1 ? "has" : "have"} duplicates`;
   }
 
   function applyFilters() {
@@ -454,6 +465,7 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
         const name = item.dataset.cardName || "";
         const qty = parseInt(item.dataset.qty || "0", 10);
         const isOwned = qty > 0;
+        const isUnavailableCard = item.dataset.unavailable === "true";
 
         const matchesSearch = !searchTerm || name.includes(searchTerm);
         const matchesStatus =
@@ -461,8 +473,12 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
           (statusFilter === "owned" && isOwned) ||
           (statusFilter === "missing" && !isOwned) ||
           (statusFilter === "duplicates" && qty > 1);
+        const matchesAvailability =
+          availabilityFilterValue === "all" ||
+          (availabilityFilterValue === "available" && !isUnavailableCard) ||
+          (availabilityFilterValue === "unavailable" && isUnavailableCard);
 
-        const visible = matchesSetFilter && matchesSearch && matchesStatus;
+        const visible = matchesSetFilter && matchesSearch && matchesStatus && matchesAvailability;
         item.classList.toggle("hidden-by-filter", !visible);
         if (visible) {
           anyVisibleInSet = true;
@@ -494,6 +510,11 @@ import { isUnavailableImageUrl } from "./wp-card-utils.js?v=2";
 
   setFilter.addEventListener("change", (e) => {
     setFilterValue = e.target.value;
+    applyFilters();
+  });
+
+  availabilityFilter.addEventListener("change", (e) => {
+    availabilityFilterValue = e.target.value;
     applyFilters();
   });
 
