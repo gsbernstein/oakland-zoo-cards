@@ -156,10 +156,9 @@
     <div class="modal-dialog share-dialog" role="dialog" aria-modal="true" aria-labelledby="syncTitle">
       <button type="button" id="syncCloseBtn" class="modal-close" aria-label="Close">&times;</button>
       <div class="share-body">
-        <h3 id="syncTitle" class="share-title">Sync Collections</h3>
+        <h3 id="syncTitle" class="share-title">Copy My Collection</h3>
 
         <section class="share-section">
-          <h4 class="share-section-title">Copy my collection</h4>
           <p class="share-hint">
             This link encodes exactly what you own. Share it with your family — opening it shows
             a card-by-card diff so they can pick which of your counts to bring in. Nothing
@@ -179,17 +178,24 @@
             <input type="text" id="syncImportInput" class="share-link-input" placeholder="Paste a share link or code…" />
             <button type="button" id="syncCompareBtn" class="btn btn-primary">Compare</button>
           </div>
-          <div id="syncDiffWrap" class="share-diff-wrap" hidden>
-            <p id="syncDiffSummary" class="share-hint"></p>
-            <div class="share-diff-bulk-actions">
-              <button type="button" id="syncDiffKeepAllBtn" class="btn btn-ghost">Keep all mine</button>
-              <button type="button" id="syncDiffTakeAllBtn" class="btn btn-ghost">Take all theirs</button>
-            </div>
-            <ul id="syncDiffList" class="share-diff-list"></ul>
-            <button type="button" id="syncApplyBtn" class="btn btn-primary share-apply-btn">Apply selected</button>
-            <p id="syncApplyStatus" class="share-hint" aria-live="polite"></p>
-          </div>
         </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="importModalOverlay" class="modal-overlay" hidden>
+    <div class="modal-dialog share-dialog" role="dialog" aria-modal="true" aria-labelledby="importTitle">
+      <button type="button" id="importCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+      <div class="share-body">
+        <h3 id="importTitle" class="share-title">Import a Collection</h3>
+        <p id="importDiffSummary" class="share-hint"></p>
+        <div class="share-diff-bulk-actions">
+          <button type="button" id="importDiffKeepAllBtn" class="btn btn-ghost">Keep all mine</button>
+          <button type="button" id="importDiffTakeAllBtn" class="btn btn-ghost">Take all theirs</button>
+        </div>
+        <ul id="importDiffList" class="share-diff-list"></ul>
+        <button type="button" id="importApplyBtn" class="btn btn-primary share-apply-btn">Apply selected</button>
+        <p id="importApplyStatus" class="share-hint" aria-live="polite"></p>
       </div>
     </div>
   </div>
@@ -230,7 +236,8 @@
   <script type="module" src="app.js?v=10"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
-  <script type="module" src="sync.js?v=2"></script>
+  <script type="module" src="sync.js?v=3"></script>
+  <script type="module" src="import.js?v=1"></script>
   <script type="module" src="brag.js?v=1"></script>
 </body>
 </html>
