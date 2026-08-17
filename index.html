@@ -21,7 +21,7 @@
 <meta property="og:url" content="https://gsbernstein.github.io/oakland-zoo-cards/" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="stylesheet" href="styles.css?v=7" />
+<link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
   <header class="site-header">
@@ -213,6 +213,7 @@
           <img id="bragImagePreview" class="share-image-preview" alt="Your collection progress" />
         </div>
         <div class="share-image-actions">
+          <button type="button" id="bragCopyBtn" class="btn btn-primary">Copy</button>
           <a id="bragImageDownloadBtn" class="btn btn-ghost" download="oakland-zoo-cards.png">Download</a>
           <button type="button" id="bragImageShareBtn" class="btn btn-ghost" hidden>Share image…</button>
         </div>
@@ -231,13 +232,14 @@
     on any change to app.js, live-sync.js, or styles.css. Both app.js and
     live-sync.js are modules and import wp-card-utils.js with its own
     separate ?v= in the import specifier — bump that one too on changes to
-    wp-card-utils.js. Same for scan.js and its card-matcher.js import.
+    wp-card-utils.js. Same for scan.js and its card-matcher.js import, and
+    for sync.js/brag.js and their shared snapshot-image.js import.
   -->
   <script type="module" src="app.js?v=10"></script>
   <script type="module" src="live-sync.js?v=9"></script>
   <script type="module" src="scan.js?v=1"></script>
-  <script type="module" src="sync.js?v=3"></script>
+  <script type="module" src="sync.js?v=4"></script>
   <script type="module" src="import.js?v=1"></script>
-  <script type="module" src="brag.js?v=1"></script>
+  <script type="module" src="brag.js?v=2"></script>
 </body>
 </html>

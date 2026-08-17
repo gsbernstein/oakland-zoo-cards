@@ -2,6 +2,8 @@
 // receiving side (import.js) is a dedicated modal, not a section tacked
 // onto this one — this file only builds/copies/sends the link, plus a
 // thin entry point that hands a pasted link/code off to import.js.
+import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=1";
+
 const syncBtn = document.getElementById("syncBtn");
 const syncModalOverlay = document.getElementById("syncModalOverlay");
 const syncCloseBtn = document.getElementById("syncCloseBtn");
@@ -98,16 +100,23 @@ document.addEventListener("keydown", (e) => {
 
 syncCopyBtn.addEventListener("click", async () => {
   const text = syncLinkInput.value;
-  let copied = false;
-  try {
-    await navigator.clipboard.writeText(text);
-    copied = true;
-  } catch (err) {
+  // Attach the same progress snapshot Brag uses (aggregate totals only, no
+  // per-card specifics) so pasting into an image-aware app (Notes, Mail,
+  // Slack) carries a visual alongside the link — the exact per-card counts
+  // that make this link actually sync-able still travel only in the text.
+  const { canvas } = renderSnapshotCanvas();
+  let copied = await copyImageAndText(canvas, text);
+  if (!copied) {
     try {
-      syncLinkInput.select();
-      copied = document.execCommand("copy");
-    } catch (err2) {
-      copied = false;
+      await navigator.clipboard.writeText(text);
+      copied = true;
+    } catch (err) {
+      try {
+        syncLinkInput.select();
+        copied = document.execCommand("copy");
+      } catch (err2) {
+        copied = false;
+      }
     }
   }
   const original = syncCopyBtn.textContent;

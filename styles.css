@@ -127,6 +127,19 @@ body {
   background: rgba(255, 255, 255, 0.28);
 }
 
+/* .btn-ghost's white-on-translucent-white styling only reads correctly on
+   the dark green header it was designed for — inside a modal's white
+   .share-body it was previously near-invisible (white text on near-white). */
+.share-body .btn-ghost {
+  background: var(--oz-sky);
+  color: var(--oz-green-dark);
+  border: 1px solid var(--border);
+}
+
+.share-body .btn-ghost:hover {
+  background: var(--border);
+}
+
 .btn-primary {
   background: var(--oz-green);
   color: white;
