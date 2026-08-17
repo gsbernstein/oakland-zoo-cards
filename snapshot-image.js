@@ -3,13 +3,12 @@
 // image, or as a visual riding along with Sync's copy-to-clipboard).
 // Pure/no DOM side effects beyond building the canvas.
 //
-// Square (1080x1080), not widescreen: messaging apps (iMessage
-// confirmed, likely others) crop an attached photo into a roughly
-// square-ish bubble thumbnail before it's tapped/expanded — a wide
-// 1200x630 version got zoomed/cropped hard enough to cut off the title,
-// logo, and footer link, leaving only the big number visible. Square
-// avoids that crop entirely, and every element is centered so there's no
-// horizontal edge to clip even if some destination still crops slightly.
+// 4:3 (1200x900), between the two extremes tried before: the original
+// 1200x630 widescreen got zoomed/cropped hard by iMessage's bubble
+// thumbnail (cutting off the title/logo/footer, leaving only the big
+// number), while a full 1080x1080 square rendered taller than it needed
+// to be. Every element stays centered so there's no edge to clip even if
+// some destination still crops slightly.
 
 function roundRect(ctx, x, y, w, h, r) {
   ctx.beginPath();
@@ -47,66 +46,67 @@ export function renderSnapshotCanvas() {
   });
   const pct = total ? Math.round((ownedTotal / total) * 100) : 0;
 
-  const SIZE = 1080;
-  const midX = SIZE / 2;
+  const WIDTH = 1200;
+  const HEIGHT = 900;
+  const midX = WIDTH / 2;
   const canvas = document.createElement("canvas");
-  canvas.width = SIZE;
-  canvas.height = SIZE;
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
   const ctx = canvas.getContext("2d");
   ctx.textAlign = "center";
 
-  const gradient = ctx.createLinearGradient(0, 0, SIZE, SIZE);
+  const gradient = ctx.createLinearGradient(0, 0, WIDTH, HEIGHT);
   gradient.addColorStop(0, "#1f6b3a");
   gradient.addColorStop(1, "#164f2b");
   ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, SIZE, SIZE);
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
   ctx.globalAlpha = 0.08;
   ctx.fillStyle = "#e9dfc9";
   ctx.beginPath();
-  ctx.arc(890, 150, 240, 0, Math.PI * 2);
+  ctx.arc(990, 130, 230, 0, Math.PI * 2);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(160, 930, 220, 0, Math.PI * 2);
+  ctx.arc(180, 780, 200, 0, Math.PI * 2);
   ctx.fill();
   ctx.globalAlpha = 1;
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "96px sans-serif";
-  ctx.fillText("🦁", midX, 200);
+  ctx.font = "88px sans-serif";
+  ctx.fillText("🦁", midX, 170);
 
-  ctx.font = "700 50px sans-serif";
-  ctx.fillText("Oakland Zoo", midX, 290);
-  ctx.fillText("Card Checklist", midX, 350);
+  ctx.font = "700 46px sans-serif";
+  ctx.fillText("Oakland Zoo", midX, 250);
+  ctx.fillText("Card Checklist", midX, 305);
 
-  ctx.font = "700 130px sans-serif";
-  ctx.fillText(ownedTotal + "/" + total, midX, 570);
+  ctx.font = "700 120px sans-serif";
+  ctx.fillText(ownedTotal + "/" + total, midX, 485);
 
   ctx.fillStyle = "#e0812a";
-  ctx.font = "600 42px sans-serif";
-  ctx.fillText("cards collected", midX, 625);
+  ctx.font = "600 38px sans-serif";
+  ctx.fillText("cards collected", midX, 535);
 
-  const barW = 820;
-  const barH = 30;
+  const barW = 900;
+  const barH = 28;
   const barX = midX - barW / 2;
-  const barY = 690;
+  const barY = 595;
   ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
-  roundRect(ctx, barX, barY, barW, barH, 15);
+  roundRect(ctx, barX, barY, barW, barH, 14);
   ctx.fill();
   ctx.fillStyle = "#e0812a";
-  roundRect(ctx, barX, barY, Math.max(barH, (barW * pct) / 100), barH, 15);
+  roundRect(ctx, barX, barY, Math.max(barH, (barW * pct) / 100), barH, 14);
   ctx.fill();
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "600 32px sans-serif";
-  ctx.fillText(pct + "%", midX, barY - 16);
+  ctx.font = "600 30px sans-serif";
+  ctx.fillText(pct + "%", midX, barY - 15);
 
   // Baked into the image itself (not just a share sheet's url field) so
   // the invite survives even a plain re-shared/downloaded copy.
   const siteUrl = buildSiteUrl();
   ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-  ctx.font = "italic 26px sans-serif";
-  ctx.fillText("Make your own: " + siteUrl.host + siteUrl.pathname, midX, 990);
+  ctx.font = "italic 25px sans-serif";
+  ctx.fillText("Make your own: " + siteUrl.host + siteUrl.pathname, midX, 845);
 
   return { canvas, ownedTotal, total, siteUrl };
 }

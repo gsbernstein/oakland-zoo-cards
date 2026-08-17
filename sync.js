@@ -2,7 +2,7 @@
 // receiving side (import.js) is a dedicated modal, not a section tacked
 // onto this one — this file only builds/copies/sends the link, plus a
 // thin entry point that hands a pasted link/code off to import.js.
-import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=2";
+import { renderSnapshotCanvas, copyImageAndText } from "./snapshot-image.js?v=3";
 
 const syncBtn = document.getElementById("syncBtn");
 const syncModalOverlay = document.getElementById("syncModalOverlay");
