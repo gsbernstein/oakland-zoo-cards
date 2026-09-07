@@ -12,12 +12,17 @@
   "standard::Tiger": {
     "tier": "available",
     "file": "cache/images/standard--tiger.webp",
-    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/688becc3ab5e0116cf83d4e1_8-of-100-Tiger.webp"
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/8-of-100-Tiger.webp"
   },
   "standard::Chimpanzee": {
     "tier": "available",
     "file": "cache/images/standard--chimpanzee.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/12-of-100-Chimpanzee.webp"
+  },
+  "standard::White-Handed (Lar) Gibbon": {
+    "tier": "available",
+    "file": "cache/images/standard--white-handed-lar-gibbon.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/17-of-100-Gibbon.webp"
   },
   "standard::California Condor": {
     "tier": "available",
@@ -33,6 +38,11 @@
     "tier": "available",
     "file": "cache/images/standard--southern-pudu.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/22-of-100-Pudu.webp"
+  },
+  "standard::Superb Starling": {
+    "tier": "available",
+    "file": "cache/images/standard--superb-starling.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/23-of-100-Superb-Starling.webp"
   },
   "standard::Leaf-Cutter Ant": {
     "tier": "available",
@@ -59,6 +69,11 @@
     "file": "cache/images/standard--yellow-billed-stork.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/31-of-100-Yellow-Billed-Stork.webp"
   },
+  "standard::Bald Eagle": {
+    "tier": "available",
+    "file": "cache/images/standard--bald-eagle.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/32-of-100-Bald-Eagle.webp"
+  },
   "standard::Green Mantella Frog": {
     "tier": "available",
     "file": "cache/images/standard--green-mantella-frog.webp",
@@ -83,6 +98,11 @@
     "tier": "available",
     "file": "cache/images/standard--dromedary-camel.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/47-of-100-Dromedary-Camel.webp"
+  },
+  "standard::Amazon Milk Tree Frog": {
+    "tier": "available",
+    "file": "cache/images/standard--amazon-milk-tree-frog.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/48-of-100-Amazon-Milk-Tree-Frog.webp"
   },
   "standard::Blue and Gold Macaw": {
     "tier": "available",
@@ -154,6 +174,11 @@
     "file": "cache/images/standard--dermestid-beetle.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/77-of-100-Dermestid-Beetle.webp"
   },
+  "standard::Blue-Bellied Roller": {
+    "tier": "available",
+    "file": "cache/images/standard--blue-bellied-roller.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/78-of-100-Blue-Bellied-Roller.webp"
+  },
   "standard::Sudan Plated Lizard": {
     "tier": "available",
     "file": "cache/images/standard--sudan-plated-lizard.webp",
@@ -178,6 +203,11 @@
     "tier": "available",
     "file": "cache/images/standard--lamancha-goat.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/04/95-of-100-LaMancha-Goat.webp"
+  },
+  "standard::Green Anole": {
+    "tier": "available",
+    "file": "cache/images/standard--green-anole.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/04/98-of-100-Green-Anole.webp"
   },
   "boo-at-the-zoo::California Condor": {
     "tier": "available",
