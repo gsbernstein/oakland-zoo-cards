@@ -9,10 +9,20 @@
     "file": "cache/images/standard--grizzly-bear.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/5-of-100-Grizzly-Bear.webp"
   },
+  "standard::Meerkat": {
+    "tier": "available",
+    "file": "cache/images/standard--meerkat.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/6-of-100-Meerkat.webp"
+  },
   "standard::Tiger": {
     "tier": "available",
     "file": "cache/images/standard--tiger.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/02/8-of-100-Tiger.webp"
+  },
+  "standard::Mountain Lion": {
+    "tier": "available",
+    "file": "cache/images/standard--mountain-lion.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/9-of-100-Mountain-Lion.webp"
   },
   "standard::Chimpanzee": {
     "tier": "available",
@@ -37,7 +47,7 @@
   "standard::Southern Pudu": {
     "tier": "available",
     "file": "cache/images/standard--southern-pudu.webp",
-    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/22-of-100-Pudu.webp"
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/22-of-100-Pudu-1.webp"
   },
   "standard::Superb Starling": {
     "tier": "available",
@@ -122,7 +132,7 @@
   "standard::Squirrel Monkey": {
     "tier": "available",
     "file": "cache/images/standard--squirrel-monkey.webp",
-    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/53-of-100-Squirrel-Monkey.webp"
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/53-of-100-Squirrel-Monkey-1.webp"
   },
   "standard::Pied Crow": {
     "tier": "available",
@@ -184,6 +194,11 @@
     "file": "cache/images/standard--sudan-plated-lizard.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/80-of-100-Sudan-Plated-Lizard.webp"
   },
+  "standard::Hamadryas Baboon (Female)": {
+    "tier": "available",
+    "file": "cache/images/standard--hamadryas-baboon-female.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/84f-of-100-Hamadryas-Baboon.webp"
+  },
   "standard::Chinese Giant Tiger Leg Centipede": {
     "tier": "available",
     "file": "cache/images/standard--chinese-giant-tiger-leg-centipede.webp",
@@ -199,10 +214,20 @@
     "file": "cache/images/standard--madagascar-sacred-ibis.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/03/90-of-100-Madagascar-Sacred-Ibis.webp"
   },
+  "standard::Spotted Turtle": {
+    "tier": "available",
+    "file": "cache/images/standard--spotted-turtle.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/04/91-of-100-Spotted-Turtle.webp"
+  },
   "standard::LaMancha Goat": {
     "tier": "available",
     "file": "cache/images/standard--lamancha-goat.webp",
     "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/04/95-of-100-LaMancha-Goat.webp"
+  },
+  "standard::Starry Night Reed Frog": {
+    "tier": "available",
+    "file": "cache/images/standard--starry-night-reed-frog.webp",
+    "sourceUrl": "https://www.oaklandzoo.org/app/uploads/2026/04/97-of-100-Starry-Night-Reed-Frog.webp"
   },
   "standard::Green Anole": {
     "tier": "available",
